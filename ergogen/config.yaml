@@ -1,0 +1,335 @@
+meta:
+  engine: 4.1.0
+  version: 0.0.1
+  author: n1tsu
+
+
+units:
+  keycaps_size: 16
+  nicenano_width: 17.78
+  nicenano_height: 33
+  battery_width: 12
+  battery_height: 30
+  niceview_width: 14
+  niceview_height: 30
+  battery_connector_width: 0.8U
+  battery_connector_height: 0.4U
+  power_switch_width: 2.7
+  power_switch_height: 7.8
+  power_switch_button_size: 1.5
+  reset_width: 4.5
+  reset_height: 6.4
+
+
+points:
+  zones:
+    matrix:
+      key:
+        spread: keycaps_size + 1
+      anchor.shift: [50,-100]
+      columns:
+        qcolumn.key.stagger: 0U
+        wcolumn.key.stagger: 0.66U
+        ecolumn.key.stagger: 0.25U
+        rcolumn.key.stagger: -0.25U
+        tcolumn.key.stagger: -0.15U
+      rows:
+        zrow.padding: keycaps_size + 1
+        arow.padding: keycaps_size + 1
+        qrow.padding: keycaps_size + 1
+
+    thumb:
+      anchor:
+        ref: matrix_tcolumn_zrow
+        shift: [-1.2U, -1.4U]
+      columns:
+        inner:
+        middle.key:
+          splay: -10
+          origin: [-0.5U, -1U]
+          width: 1U
+
+        outer.key:
+          splay: -10
+          origin: [-0.5U, -1.0U]
+          height: 1U
+
+  mirror:
+    ref: matrix_rcolumn_arow
+    distance: 140
+
+
+outlines:
+  keycaps:
+    - what: rectangle
+      where: true
+      size: keycaps_size
+
+  controller:
+    - what: rectangle
+      size: [nicenano_width, nicenano_height]
+      adjust:
+        ref: matrix_tcolumn_arow
+        shift: [1.4U, 1U]
+        rotate: 90
+    - what: rectangle
+      size: [nicenano_width, nicenano_height]
+      adjust:
+        ref: mirror_matrix_tcolumn_arow
+        shift: [1.4U, 1U]
+        rotate: 90
+
+  battery:
+    - what: rectangle
+      size: [battery_width, battery_height]
+      adjust:
+        ref: matrix_tcolumn_arow
+        shift: [1.4U, -1.9U]
+        rotate: 90
+    - what: rectangle
+      size: [battery_width, battery_height]
+      adjust:
+        ref: mirror_matrix_tcolumn_arow
+        shift: [1.4U, -1.9U]
+        rotate: 90
+
+  niceview:
+    - what: rectangle
+      size: [niceview_width, niceview_height]
+      adjust:
+        ref: matrix_tcolumn_arow
+        shift: [1.4U, -0.4U]
+    - what: rectangle
+      size: [niceview_width, niceview_height]
+      adjust:
+        ref: mirror_matrix_tcolumn_arow
+        shift: [1.4U, -0.4U]
+
+  battery_connector:
+    - what: rectangle
+      size: [battery_connector_width, battery_connector_height]
+      adjust:
+        ref: matrix_qcolumn_arow
+        shift: [3U, -1.4U]
+    - what: rectangle
+      size: [battery_connector_width, battery_connector_height]
+      adjust:
+        ref: mirror_matrix_qcolumn_arow
+        shift: [3U, -1.4U]
+
+  power_switch:
+    - what: rectangle
+      size: [power_switch_width, power_switch_height]
+      adjust:
+        ref: matrix_tcolumn_arow
+        shift: [2.2U, 0U]
+    - what: rectangle
+      size: [power_switch_width, power_switch_height]
+      adjust:
+        ref: mirror_matrix_tcolumn_arow
+        shift: [2.2U, 0U]
+
+  reset:
+    - what: rectangle
+      size: [reset_width, reset_height]
+      adjust:
+        ref: matrix_tcolumn_arow
+        shift: [2.2U, -0.8U]
+    - what: rectangle
+      size: [reset_width, reset_height]
+      adjust:
+        ref: mirror_matrix_tcolumn_arow
+        shift: [2.2U, -0.8U]
+
+  board:
+    - what: polygon
+      operation: stack
+      fillet: 1.5
+      points:
+      - ref: matrix_qcolumn_qrow
+        shift: [-0.6U, 0.6U]
+      - ref: matrix_qcolumn_qrow
+        shift: [0.4U, 0.6U]
+      - ref: matrix_wcolumn_qrow
+        shift: [-0.6U, 0.6U]
+      - ref: matrix_wcolumn_qrow
+        shift: [0.4U, 0.6U]
+      - ref: matrix_ecolumn_qrow
+        shift: [-0.6U, 0.6U]
+      - ref: matrix_ecolumn_qrow
+        shift: [0.6U, 0.6U]
+      - ref: matrix_rcolumn_qrow
+        shift: [-0.4U, 0.6U]
+      - ref: matrix_rcolumn_qrow
+        shift: [0.6U, 0.6U]
+      - ref: matrix_tcolumn_qrow
+        shift: [-0.4U, 0.6U]
+      - ref: matrix_tcolumn_qrow
+        shift: [2.4U, 0.6U]
+      - ref: matrix_tcolumn_qrow
+        shift: [2.4U, -3.3U]
+      - ref: thumb_outer
+        shift: [0.6U, 0.6U]
+      - ref: thumb_outer
+        shift: [0.6U, -0.7U]
+      - ref: thumb_middle
+        shift: [0.6U, -0.7U]
+      - ref: thumb_middle
+        shift: [-0.6U, -0.7U]
+      - ref: thumb_inner
+        shift: [-0.6U, -0.7U]
+      - ref: thumb_inner
+        shift: [-0.6U, 0U]
+      - ref: matrix_ecolumn_zrow
+        shift: [0.4U, -0.6U]
+      - ref: matrix_ecolumn_zrow
+        shift: [-0.4U, -0.6U]
+      - ref: matrix_wcolumn_zrow
+        shift: [0.6U, -0.6U]
+      - ref: matrix_wcolumn_zrow
+        shift: [-0.4U, -0.6U]
+      - ref: matrix_qcolumn_zrow
+        shift: [0.6U, -0.6U]
+      - ref: matrix_qcolumn_zrow
+        shift: [-0.6U, -0.6U]
+
+    - what: polygon
+      operation: stack
+      fillet: 1.5
+      points:
+      - ref: mirror_matrix_qcolumn_qrow
+        shift: [-0.6U, 0.6U]
+      - ref: mirror_matrix_qcolumn_qrow
+        shift: [0.4U, 0.6U]
+      - ref: mirror_matrix_wcolumn_qrow
+        shift: [-0.6U, 0.6U]
+      - ref: mirror_matrix_wcolumn_qrow
+        shift: [0.4U, 0.6U]
+      - ref: mirror_matrix_ecolumn_qrow
+        shift: [-0.6U, 0.6U]
+      - ref: mirror_matrix_ecolumn_qrow
+        shift: [0.6U, 0.6U]
+      - ref: mirror_matrix_rcolumn_qrow
+        shift: [-0.4U, 0.6U]
+      - ref: mirror_matrix_rcolumn_qrow
+        shift: [0.6U, 0.6U]
+      - ref: mirror_matrix_tcolumn_qrow
+        shift: [-0.4U, 0.6U]
+      - ref: mirror_matrix_tcolumn_qrow
+        shift: [2.4U, 0.6U]
+      - ref: mirror_matrix_tcolumn_qrow
+        shift: [2.4U, -3.3U]
+      - ref: mirror_thumb_outer
+        shift: [0.6U, 0.6U]
+      - ref: mirror_thumb_outer
+        shift: [0.6U, -0.7U]
+      - ref: mirror_thumb_middle
+        shift: [0.6U, -0.7U]
+      - ref: mirror_thumb_middle
+        shift: [-0.6U, -0.7U]
+      - ref: mirror_thumb_inner
+        shift: [-0.6U, -0.7U]
+      - ref: mirror_thumb_inner
+        shift: [-0.6U, 0U]
+      - ref: mirror_matrix_ecolumn_zrow
+        shift: [0.4U, -0.6U]
+      - ref: mirror_matrix_ecolumn_zrow
+        shift: [-0.4U, -0.6U]
+      - ref: mirror_matrix_wcolumn_zrow
+        shift: [0.6U, -0.6U]
+      - ref: mirror_matrix_wcolumn_zrow
+        shift: [-0.4U, -0.6U]
+      - ref: mirror_matrix_qcolumn_zrow
+        shift: [0.6U, -0.6U]
+      - ref: mirror_matrix_qcolumn_zrow
+        shift: [-0.6U, -0.6U]
+
+
+  combo:
+    - operation: stack
+      name: keycaps
+    - operation: stack
+      name: board
+    - operation: stack
+      name: controller
+    - operation: stack
+      name: battery
+    - operation: stack
+      name: battery_connector
+    - operation: stack
+      name: niceview
+    - operation: stack
+      name: power_switch
+    - operation: stack
+      name: reset
+
+
+pcbs:
+  main_pcb:
+    outlines:
+      main:
+        outline: board
+      battery:
+        outline: battery
+
+    template: kicad8
+    footprints:
+      switch:
+        what: pg1316s
+        where: true
+        params:
+          from: GND
+          to: "{{name}}"
+
+      diodes:
+        what: diode_tht_sod123
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0.3, 2.4]
+        
+      controller_left:
+        what: nicenano
+        where: [matrix_tcolumn_arow]
+        adjust:
+          shift: [1.4U, 1U]
+          rotate: 180
+      controller_right:
+        what: nicenano
+        where: [mirror_matrix_tcolumn_arow]
+        adjust:
+          shift: [1.4U, 1U]
+
+      battery_connector:
+        what: battery_connector_jst_ph_2
+        where: [matrix_qcolumn_arow, mirror_matrix_qcolumn_arow]
+        adjust: 
+          shift: [3.5U, -1.2U]
+          rotate: 90
+
+      power_switch_left:
+        what: power_switch_smd_side
+        where: [matrix_tcolumn_arow]
+        adjust: 
+          shift: [2.3U, 0U]
+      power_switch_right:
+        what: power_switch_smd_side
+        where: [mirror_matrix_tcolumn_arow]
+        adjust: 
+          shift: [2.3U, 0U]
+          rotate: 180
+
+      reset_button:
+        what: reset_switch_smd_side
+        where: [matrix_tcolumn_arow, mirror_matrix_tcolumn_arow]
+        adjust: 
+          shift: [2.3U, -0.8U]
+          rotate: -90
+
+      niceview:
+        what: display_nice_view
+        where: [matrix_tcolumn_arow, mirror_matrix_tcolumn_arow]
+        adjust: 
+          shift: [1.5U, -0.5U]

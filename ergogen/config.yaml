@@ -3,7 +3,6 @@ meta:
   version: 0.0.1
   author: n1tsu
 
-
 units:
   keycaps_size: 16
   nicenano_width: 17.78
@@ -20,13 +19,12 @@ units:
   reset_width: 4.5
   reset_height: 6.4
 
-
 points:
   zones:
     matrix:
       key:
         spread: keycaps_size + 1
-      anchor.shift: [50,-100]
+      anchor.shift: [50, -100]
       columns:
         qcolumn.key.stagger: 0U
         wcolumn.key.stagger: 0.66U
@@ -41,7 +39,7 @@ points:
     thumb:
       anchor:
         ref: matrix_tcolumn_zrow
-        shift: [-1.2U, -1.4U]
+        shift: [-1.2U, -1.1U]
       columns:
         inner:
         middle.key:
@@ -57,7 +55,6 @@ points:
   mirror:
     ref: matrix_rcolumn_arow
     distance: 140
-
 
 outlines:
   keycaps:
@@ -84,13 +81,13 @@ outlines:
       size: [battery_width, battery_height]
       adjust:
         ref: matrix_tcolumn_arow
-        shift: [1.4U, -1.9U]
+        shift: [1.4U, -1U]
         rotate: 90
     - what: rectangle
       size: [battery_width, battery_height]
       adjust:
         ref: mirror_matrix_tcolumn_arow
-        shift: [1.4U, -1.9U]
+        shift: [1.4U, -1U]
         rotate: 90
 
   niceview:
@@ -146,104 +143,103 @@ outlines:
       operation: stack
       fillet: 1.5
       points:
-      - ref: matrix_qcolumn_qrow
-        shift: [-0.6U, 0.6U]
-      - ref: matrix_qcolumn_qrow
-        shift: [0.4U, 0.6U]
-      - ref: matrix_wcolumn_qrow
-        shift: [-0.6U, 0.6U]
-      - ref: matrix_wcolumn_qrow
-        shift: [0.4U, 0.6U]
-      - ref: matrix_ecolumn_qrow
-        shift: [-0.6U, 0.6U]
-      - ref: matrix_ecolumn_qrow
-        shift: [0.6U, 0.6U]
-      - ref: matrix_rcolumn_qrow
-        shift: [-0.4U, 0.6U]
-      - ref: matrix_rcolumn_qrow
-        shift: [0.6U, 0.6U]
-      - ref: matrix_tcolumn_qrow
-        shift: [-0.4U, 0.6U]
-      - ref: matrix_tcolumn_qrow
-        shift: [2.4U, 0.6U]
-      - ref: matrix_tcolumn_qrow
-        shift: [2.4U, -3.3U]
-      - ref: thumb_outer
-        shift: [0.6U, 0.6U]
-      - ref: thumb_outer
-        shift: [0.6U, -0.7U]
-      - ref: thumb_middle
-        shift: [0.6U, -0.7U]
-      - ref: thumb_middle
-        shift: [-0.6U, -0.7U]
-      - ref: thumb_inner
-        shift: [-0.6U, -0.7U]
-      - ref: thumb_inner
-        shift: [-0.6U, 0U]
-      - ref: matrix_ecolumn_zrow
-        shift: [0.4U, -0.6U]
-      - ref: matrix_ecolumn_zrow
-        shift: [-0.4U, -0.6U]
-      - ref: matrix_wcolumn_zrow
-        shift: [0.6U, -0.6U]
-      - ref: matrix_wcolumn_zrow
-        shift: [-0.4U, -0.6U]
-      - ref: matrix_qcolumn_zrow
-        shift: [0.6U, -0.6U]
-      - ref: matrix_qcolumn_zrow
-        shift: [-0.6U, -0.6U]
+        - ref: matrix_qcolumn_qrow
+          shift: [-0.6U, 0.6U]
+        - ref: matrix_qcolumn_qrow
+          shift: [0.4U, 0.6U]
+        - ref: matrix_wcolumn_qrow
+          shift: [-0.6U, 0.6U]
+        - ref: matrix_wcolumn_qrow
+          shift: [0.4U, 0.6U]
+        - ref: matrix_ecolumn_qrow
+          shift: [-0.6U, 0.6U]
+        - ref: matrix_ecolumn_qrow
+          shift: [0.6U, 0.6U]
+        - ref: matrix_rcolumn_qrow
+          shift: [-0.4U, 0.6U]
+        - ref: matrix_rcolumn_qrow
+          shift: [0.6U, 0.6U]
+        - ref: matrix_tcolumn_qrow
+          shift: [-0.4U, 0.6U]
+        - ref: matrix_tcolumn_qrow
+          shift: [2.4U, 0.6U]
+        - ref: matrix_tcolumn_qrow
+          shift: [2.4U, -3.3U]
+        - ref: thumb_outer
+          shift: [0.6U, 0.6U]
+        - ref: thumb_outer
+          shift: [0.6U, -0.7U]
+        - ref: thumb_middle
+          shift: [0.6U, -0.7U]
+        - ref: thumb_middle
+          shift: [-0.6U, -0.7U]
+        - ref: thumb_inner
+          shift: [-0.6U, -0.7U]
+        - ref: thumb_inner
+          shift: [-0.6U, 0U]
+        - ref: matrix_ecolumn_zrow
+          shift: [0.4U, -0.6U]
+        - ref: matrix_ecolumn_zrow
+          shift: [-0.4U, -0.6U]
+        - ref: matrix_wcolumn_zrow
+          shift: [0.6U, -0.6U]
+        - ref: matrix_wcolumn_zrow
+          shift: [-0.4U, -0.6U]
+        - ref: matrix_qcolumn_zrow
+          shift: [0.6U, -0.6U]
+        - ref: matrix_qcolumn_zrow
+          shift: [-0.6U, -0.6U]
 
     - what: polygon
       operation: stack
       fillet: 1.5
       points:
-      - ref: mirror_matrix_qcolumn_qrow
-        shift: [-0.6U, 0.6U]
-      - ref: mirror_matrix_qcolumn_qrow
-        shift: [0.4U, 0.6U]
-      - ref: mirror_matrix_wcolumn_qrow
-        shift: [-0.6U, 0.6U]
-      - ref: mirror_matrix_wcolumn_qrow
-        shift: [0.4U, 0.6U]
-      - ref: mirror_matrix_ecolumn_qrow
-        shift: [-0.6U, 0.6U]
-      - ref: mirror_matrix_ecolumn_qrow
-        shift: [0.6U, 0.6U]
-      - ref: mirror_matrix_rcolumn_qrow
-        shift: [-0.4U, 0.6U]
-      - ref: mirror_matrix_rcolumn_qrow
-        shift: [0.6U, 0.6U]
-      - ref: mirror_matrix_tcolumn_qrow
-        shift: [-0.4U, 0.6U]
-      - ref: mirror_matrix_tcolumn_qrow
-        shift: [2.4U, 0.6U]
-      - ref: mirror_matrix_tcolumn_qrow
-        shift: [2.4U, -3.3U]
-      - ref: mirror_thumb_outer
-        shift: [0.6U, 0.6U]
-      - ref: mirror_thumb_outer
-        shift: [0.6U, -0.7U]
-      - ref: mirror_thumb_middle
-        shift: [0.6U, -0.7U]
-      - ref: mirror_thumb_middle
-        shift: [-0.6U, -0.7U]
-      - ref: mirror_thumb_inner
-        shift: [-0.6U, -0.7U]
-      - ref: mirror_thumb_inner
-        shift: [-0.6U, 0U]
-      - ref: mirror_matrix_ecolumn_zrow
-        shift: [0.4U, -0.6U]
-      - ref: mirror_matrix_ecolumn_zrow
-        shift: [-0.4U, -0.6U]
-      - ref: mirror_matrix_wcolumn_zrow
-        shift: [0.6U, -0.6U]
-      - ref: mirror_matrix_wcolumn_zrow
-        shift: [-0.4U, -0.6U]
-      - ref: mirror_matrix_qcolumn_zrow
-        shift: [0.6U, -0.6U]
-      - ref: mirror_matrix_qcolumn_zrow
-        shift: [-0.6U, -0.6U]
-
+        - ref: mirror_matrix_qcolumn_qrow
+          shift: [-0.6U, 0.6U]
+        - ref: mirror_matrix_qcolumn_qrow
+          shift: [0.4U, 0.6U]
+        - ref: mirror_matrix_wcolumn_qrow
+          shift: [-0.6U, 0.6U]
+        - ref: mirror_matrix_wcolumn_qrow
+          shift: [0.4U, 0.6U]
+        - ref: mirror_matrix_ecolumn_qrow
+          shift: [-0.6U, 0.6U]
+        - ref: mirror_matrix_ecolumn_qrow
+          shift: [0.6U, 0.6U]
+        - ref: mirror_matrix_rcolumn_qrow
+          shift: [-0.4U, 0.6U]
+        - ref: mirror_matrix_rcolumn_qrow
+          shift: [0.6U, 0.6U]
+        - ref: mirror_matrix_tcolumn_qrow
+          shift: [-0.4U, 0.6U]
+        - ref: mirror_matrix_tcolumn_qrow
+          shift: [2.4U, 0.6U]
+        - ref: mirror_matrix_tcolumn_qrow
+          shift: [2.4U, -3.3U]
+        - ref: mirror_thumb_outer
+          shift: [0.6U, 0.6U]
+        - ref: mirror_thumb_outer
+          shift: [0.6U, -0.7U]
+        - ref: mirror_thumb_middle
+          shift: [0.6U, -0.7U]
+        - ref: mirror_thumb_middle
+          shift: [-0.6U, -0.7U]
+        - ref: mirror_thumb_inner
+          shift: [-0.6U, -0.7U]
+        - ref: mirror_thumb_inner
+          shift: [-0.6U, 0U]
+        - ref: mirror_matrix_ecolumn_zrow
+          shift: [0.4U, -0.6U]
+        - ref: mirror_matrix_ecolumn_zrow
+          shift: [-0.4U, -0.6U]
+        - ref: mirror_matrix_wcolumn_zrow
+          shift: [0.6U, -0.6U]
+        - ref: mirror_matrix_wcolumn_zrow
+          shift: [-0.4U, -0.6U]
+        - ref: mirror_matrix_qcolumn_zrow
+          shift: [0.6U, -0.6U]
+        - ref: mirror_matrix_qcolumn_zrow
+          shift: [-0.6U, -0.6U]
 
   combo:
     - operation: stack
@@ -262,7 +258,6 @@ outlines:
       name: power_switch
     - operation: stack
       name: reset
-
 
 pcbs:
   main_pcb:
@@ -289,47 +284,48 @@ pcbs:
           to: "{{row_net}}"
         adjust:
           shift: [0.3, 2.4]
-        
+
       controller_left:
         what: nicenano
         where: [matrix_tcolumn_arow]
         adjust:
-          shift: [1.4U, 1U]
+          shift: [1.4U, 0.7U]
           rotate: 180
       controller_right:
         what: nicenano
         where: [mirror_matrix_tcolumn_arow]
         adjust:
-          shift: [1.4U, 1U]
+          shift: [1.4U, 0.7U]
 
       battery_connector:
         what: battery_connector_jst_ph_2
         where: [matrix_qcolumn_arow, mirror_matrix_qcolumn_arow]
-        adjust: 
-          shift: [3.5U, -1.2U]
+        adjust:
+          shift: [4.5U, -1.2U]
           rotate: 90
 
       power_switch_left:
         what: power_switch_smd_side
-        where: [matrix_tcolumn_arow]
-        adjust: 
-          shift: [2.3U, 0U]
+        where: [matrix_tcolumn_qrow]
+        adjust:
+          shift: [1U, 0.5U]
+          rotate: 90
       power_switch_right:
         what: power_switch_smd_side
-        where: [mirror_matrix_tcolumn_arow]
-        adjust: 
-          shift: [2.3U, 0U]
-          rotate: 180
+        where: [mirror_matrix_tcolumn_qrow]
+        adjust:
+          shift: [1U, 0.5U]
+          rotate: -90
 
       reset_button:
         what: reset_switch_smd_side
-        where: [matrix_tcolumn_arow, mirror_matrix_tcolumn_arow]
-        adjust: 
-          shift: [2.3U, -0.8U]
-          rotate: -90
+        where: [matrix_tcolumn_qrow, mirror_matrix_tcolumn_qrow]
+        adjust:
+          shift: [1.5U, 0.5U]
 
       niceview:
         what: display_nice_view
         where: [matrix_tcolumn_arow, mirror_matrix_tcolumn_arow]
-        adjust: 
-          shift: [1.5U, -0.5U]
+        adjust:
+          shift: [1.5U, -0.1U]
+          rotate: 90

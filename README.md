@@ -9,9 +9,10 @@
 
 ## TODO
 
-- [ ] modify footprints to solder-on
+- [x] modify footprints to solder-on
+- [x] verify every components orientation
+- [x] add text on PCB
+- [x] add case holes
+- [ ] add logo on PCB
 - [ ] wire components
-- [ ] verify every components orientation
-- [ ] add text and images on PCB
-- [ ] add case holes
 - [ ] design 3D case

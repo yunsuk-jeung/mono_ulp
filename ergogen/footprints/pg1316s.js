@@ -5,7 +5,7 @@
 // Params
 //    keycaps: default is false
 //      if true, will add sized keycap box around the footprint
-// 
+//
 
 module.exports = {
   params: {

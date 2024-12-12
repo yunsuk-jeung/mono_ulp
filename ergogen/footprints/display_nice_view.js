@@ -42,7 +42,7 @@
 //      if true it will include the silkscreen layer.
 //    include_labels default is true
 //      if true and Silkscreen layer is included, it will include the pin labels. The labels
-//      will match the *opposite* side of the board when the footprint is set to be reversible, 
+//      will match the *opposite* side of the board when the footprint is set to be reversible,
 //      since they are meant to match the solder jumpers behavior and aid testing.
 //    include_courtyard: default is true
 //      if true it will include a courtyard outline around the pin header.
@@ -215,11 +215,11 @@ module.exports = {
     `
 
     const bottom = `
-    (pad "1" thru_hole oval (at -5.08 16.7 ${270 + p.r}) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${socket_nets[0].str})
-    (pad "2" thru_hole oval (at -2.54 16.7 ${270 + p.r}) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${socket_nets[1].str})
-    (pad "3" thru_hole oval (at 0 16.7 ${270 + p.r}) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${socket_nets[2].str})
-    (pad "4" thru_hole oval (at 2.54 16.7 ${270 + p.r}) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${socket_nets[3].str})
-    (pad "5" thru_hole circle (at 5.08 16.7 ${270 + p.r}) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") ${socket_nets[4].str})
+    (pad "1" smd oval (at -5.08 16.7 ${270 + p.r}) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") ${socket_nets[0].str})
+    (pad "2" smd oval (at -2.54 16.7 ${270 + p.r}) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") ${socket_nets[1].str})
+    (pad "3" smd oval (at 0 16.7 ${270 + p.r}) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") ${socket_nets[2].str})
+    (pad "4" smd oval (at 2.54 16.7 ${270 + p.r}) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") ${socket_nets[3].str})
+    (pad "5" smd circle (at 5.08 16.7 ${270 + p.r}) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") ${socket_nets[4].str})
 
     (fp_line (start 5.4 13.4) (end 5.4 -11.9) (layer Dwgs.User) (stroke (width 0.15) (type solid)))
     (fp_line (start -5.4 13.4) (end -5.4 -11.9) (layer Dwgs.User) (stroke (width 0.15) (type solid)))

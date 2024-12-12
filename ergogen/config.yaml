@@ -45,16 +45,16 @@ units:
 
   #niceview_ref: controller
   niceview_rel_x: 0
-  niceview_rel_y: -nicenano_width - 2
+  niceview_rel_y: -nicenano_width
   niceview_rotation: -90
 
   #battery_ref: niceview
-  battery_rel_x: 0
-  battery_rel_y: -niceview_width - 2
+  battery_rel_x: -4
+  battery_rel_y: -niceview_width
   battery_rotation: 90
 
   #battery_connector_ref: battery
-  battery_connector_rel_x: 0
+  battery_connector_rel_x: 2
   battery_connector_rel_y: -battery_width
   battery_connector_rotation: 90
 
@@ -64,7 +64,7 @@ units:
   reset_rotation: 0
 
   #power_ref: reset
-  power_rel_x: 20
+  power_rel_x: 14
   power_rel_y: 0
   power_rotation: 0
 
@@ -131,6 +131,26 @@ points:
         ref: reset
         shift: [power_rel_x, power_rel_y]
 
+    hole_up_left:
+      key.tags: "holes"
+      anchor:
+        ref: matrix_qcolumn_qrow
+        shift: [keycaps_size / 2 - 2, keycaps_size / 2 + 3]
+    hole_up_right:
+      key.tags: "holes"
+      anchor:
+        ref: reset
+        shift: [-8, -1]
+    hole_down_left:
+      key.tags: "holes"
+      anchor:
+        ref: matrix_ecolumn_zrow
+        shift: [0, -keycaps_size / 2 - 4]
+    hole_down_right:
+      key.tags: "holes"
+      anchor:
+        ref: battery_connector
+        shift: [-8, -2]
   mirror:
     ref: matrix_rcolumn_arow
     distance: 140
@@ -247,19 +267,19 @@ outlines:
         - ref: matrix_tcolumn_qrow
           shift:
             [
-              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
-              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
-            ]
-        - ref: matrix_tcolumn_qrow
-          shift:
-            [
-              keycaps_size / 2 + case_edge_size + keycaps_padding / 2 + nicenano_height + components_padding,
+              keycaps_size / 2 + keycaps_padding + 1,
               keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
             ]
         - ref: matrix_tcolumn_qrow
           shift:
             [
-              keycaps_size / 2 + case_edge_size + keycaps_padding / 2 + nicenano_height + components_padding,
+              keycaps_size / 2 + keycaps_padding + nicenano_height + components_padding + 1,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: matrix_tcolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 + keycaps_padding + nicenano_height + components_padding + 1,
               keycaps_size / 2 + - (nicenano_width + battery_width + niceview_width + battery_connector_width + 4),
             ]
         # Lower right
@@ -297,7 +317,7 @@ outlines:
           shift:
             [
               -(keycaps_size / 2 + case_edge_size),
-              -(thumb_rel_y + case_edge_size + keycaps_padding / 2 + ecol_stagger),
+              -(thumb_rel_y + case_edge_size + keycaps_padding + ecol_stagger),
             ]
         - ref: matrix_wcolumn_zrow
           shift:
@@ -382,19 +402,19 @@ outlines:
         - ref: mirror_matrix_tcolumn_qrow
           shift:
             [
-              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
-              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
-            ]
-        - ref: mirror_matrix_tcolumn_qrow
-          shift:
-            [
-              keycaps_size / 2 + case_edge_size + keycaps_padding / 2 + nicenano_height + components_padding,
+              keycaps_size / 2 + keycaps_padding + 1,
               keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
             ]
         - ref: mirror_matrix_tcolumn_qrow
           shift:
             [
-              keycaps_size / 2 + case_edge_size + keycaps_padding / 2 + nicenano_height + components_padding,
+              keycaps_size / 2 + keycaps_padding + nicenano_height + components_padding + 1,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: mirror_matrix_tcolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 + keycaps_padding + nicenano_height + components_padding + 1,
               keycaps_size / 2 + - (nicenano_width + battery_width + niceview_width + battery_connector_width + 4),
             ]
         # Lower right
@@ -432,7 +452,7 @@ outlines:
           shift:
             [
               -(keycaps_size / 2 + case_edge_size),
-              -(thumb_rel_y + case_edge_size + keycaps_padding / 2 + ecol_stagger),
+              -(thumb_rel_y + case_edge_size + keycaps_padding + ecol_stagger),
             ]
         - ref: mirror_matrix_wcolumn_zrow
           shift:
@@ -493,7 +513,9 @@ pcbs:
       diodes:
         what: diode_tht_sod123
         where: keys
+        asym: both
         params:
+          side: "F"
           from: "{{colrow}}"
           to: "{{row_net}}"
         adjust:
@@ -545,3 +567,16 @@ pcbs:
         where: niceview
         asym: both
         adjust.rotate: niceview_rotation
+
+      holes:
+        what: mounting_hole_plated
+        where: holes
+
+      text:
+        what: utility_text
+        where: controller
+        asym: both
+        params:
+          side: "B"
+          mirrored: true
+          text: "n1tsu"

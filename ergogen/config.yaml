@@ -15,7 +15,7 @@ units:
   thumb_splay: -10
 
   # case
-  case_edge_size: 4
+  case_edge_size: 0
 
   # components
   components_padding: 4
@@ -36,11 +36,11 @@ units:
   # relative placement
   # thumb_ref: matrix_tcolumn_zrow
   thumb_rel_x: -1.2U
-  thumb_rel_y: -1.1U
+  thumb_rel_y: -1.0U
 
   #controller_ref: matrix_tcolumn_qrow
   controller_rel_x: nicenano_height / 2 + keycaps_size / 2 + components_padding
-  controller_rel_y: -2
+  controller_rel_y: -6
   controller_rotation: -90
 
   #niceview_ref: controller
@@ -55,16 +55,16 @@ units:
 
   #battery_connector_ref: battery
   battery_connector_rel_x: 2
-  battery_connector_rel_y: -battery_width
+  battery_connector_rel_y: -battery_width + 2
   battery_connector_rotation: 90
 
   #reset_ref: controller
-  reset_rel_x: -10
-  reset_rel_y: nicenano_width / 2 + case_edge_size
+  reset_rel_x: -8
+  reset_rel_y: nicenano_width / 2 + 4
   reset_rotation: 0
 
   #power_ref: reset
-  power_rel_x: 14
+  power_rel_x: 12
   power_rel_y: 0
   power_rotation: 0
 
@@ -95,11 +95,11 @@ points:
         inner:
         middle.key:
           splay: thumb_splay
-          origin: [-0.5U, -1U]
+          origin: [-0.5U, -0.5U]
 
         outer.key:
           splay: thumb_splay
-          origin: [-0.5U, -1U]
+          origin: [-0.5U, -0.5U]
 
     controller:
       anchor:
@@ -134,23 +134,24 @@ points:
     hole_up_left:
       key.tags: "holes"
       anchor:
-        ref: matrix_qcolumn_qrow
-        shift: [keycaps_size / 2 - 2, keycaps_size / 2 + 3]
+        ref: reset
+        shift: [-reset_height - 2, -1]
     hole_up_right:
       key.tags: "holes"
       anchor:
-        ref: reset
-        shift: [-8, -1]
+        ref: power
+        shift: [power_height + 2, -1]
     hole_down_left:
       key.tags: "holes"
       anchor:
-        ref: matrix_ecolumn_zrow
-        shift: [0, -keycaps_size / 2 - 4]
-    hole_down_right:
-      key.tags: "holes"
-      anchor:
         ref: battery_connector
-        shift: [-8, -2]
+        shift: [-battery_connector_height / 2, 0]
+
+    text:
+      anchor:
+        ref: matrix_ecolumn_zrow
+        shift: [0, -keycaps_size / 2 - 3]
+
   mirror:
     ref: matrix_rcolumn_arow
     distance: 140
@@ -510,16 +511,24 @@ pcbs:
           from: GND
           to: "{{name}}"
 
-      diodes:
+      diodes_left:
         what: diode_tht_sod123
-        where: keys
-        asym: both
+        where: /^matrix_.*|^thumb_.*/
         params:
           side: "F"
           from: "{{colrow}}"
           to: "{{row_net}}"
         adjust:
           shift: [0.3, 2.4]
+      diodes_right:
+        what: diode_tht_sod123
+        where: /^mirror_matrix_.*|^mirror_thumb_.*/
+        params:
+          side: "F"
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [-0.3, 2.4]
 
       # controller footprints isn't mirrored
       controller_left:
@@ -574,9 +583,9 @@ pcbs:
 
       text:
         what: utility_text
-        where: controller
+        where: text
         asym: both
         params:
-          side: "B"
-          mirrored: true
-          text: "n1tsu"
+          side: "F"
+          mirrored: false
+          text: "n36tsu v0.1.0"

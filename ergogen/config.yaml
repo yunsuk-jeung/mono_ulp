@@ -508,8 +508,8 @@ pcbs:
         what: pg1316s
         where: keys
         params:
-          from: GND
-          to: "{{name}}"
+          from: "{{column_net}}"
+          to: "{{colrow}}"
 
       diodes_left:
         what: diode_tht_sod123
@@ -574,6 +574,10 @@ pcbs:
       niceview:
         what: display_nice_view
         where: niceview
+        params:
+          CS: P002
+          SCK: P029
+          MOSI: P31
         asym: both
         adjust.rotate: niceview_rotation
 

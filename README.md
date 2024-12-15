@@ -1,4 +1,4 @@
-## PG1316S keyboard
+## n36tsu
 
 - bluetooth
 - 36 keys

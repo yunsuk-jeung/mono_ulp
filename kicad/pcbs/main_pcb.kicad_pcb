@@ -11,7 +11,7 @@
   (paper "A3")
   (title_block
     (title "main_pcb")
-    (date "2024-12-14")
+    (date "2024-12-16")
     (rev "0.0.1")
     (company "n1tsu")
   )
@@ -148,15 +148,14 @@
 (net 64 "JST1_2")
 (net 65 "JST2_1")
 (net 66 "JST2_2")
-(net 67 "P02")
-(net 68 "DISP1_1")
-(net 69 "DISP1_2")
-(net 70 "DISP1_4")
-(net 71 "DISP1_5")
-(net 72 "DISP2_1")
-(net 73 "DISP2_2")
-(net 74 "DISP2_4")
-(net 75 "DISP2_5")
+(net 67 "DISP1_1")
+(net 68 "DISP1_2")
+(net 69 "DISP1_4")
+(net 70 "DISP1_5")
+(net 71 "DISP2_1")
+(net 72 "DISP2_2")
+(net 73 "DISP2_4")
+(net 74 "DISP2_5")
 
   
 (footprint "CPG1316S01D02_mikeholscher"
@@ -2441,7 +2440,7 @@
 
   (footprint "ceoloide:power_switch_smd_side"
     (layer "F.Cu")
-    (at 150.5 49.394499999999994 90)
+    (at 150.5 49.69449999999999 90)
     (property "Reference" "PWR1"
       (at -3.6 0 0)
       (layer "F.SilkS")
@@ -2487,7 +2486,7 @@
 
   (footprint "ceoloide:power_switch_smd_side"
     (layer "F.Cu")
-    (at 191.5 49.394499999999994 90)
+    (at 191.5 49.69449999999999 90)
     (property "Reference" "PWR2"
       (at -3.6 0 0)
       (layer "F.SilkS")
@@ -2533,7 +2532,7 @@
 
   (footprint "ceoloide:reset_switch_smd_side"
     (layer "F.Cu")
-    (at 138.5 49.394499999999994 0)
+    (at 138.5 49.69449999999999 0)
     (property "Reference" "RST1"
       (at 0 0 0)
       (layer "F.SilkS")
@@ -2548,6 +2547,9 @@
     (fp_line (start -1.3 -2.75) (end 1.3 -2.75) (stroke (width 0.1) (type solid)) (layer "Dwgs.User"))
     (fp_line (start 1.3 -2.75) (end 1.3 -1.75) (stroke (width 0.1) (type solid)) (layer "Dwgs.User"))
     (fp_line (start 2.35 -1.75) (end 2.35 1.75) (stroke (width 0.1) (type solid)) (layer "Dwgs.User"))
+    
+    (pad "" np_thru_hole circle (at 0 -1.375 180) (size 0.75 0.75) (drill 0.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 0 1.375 180) (size 0.75 0.75) (drill 0.75) (layers "*.Cu" "*.Mask"))
     
     (pad "1" smd rect (at 2.625 -0.85 180) (size 1.55 1) (layers "F.Cu" "F.Paste" "F.Mask") (net 38 "GND"))
     (pad "2" smd rect (at 2.625 0.85 180) (size 1.55 1) (layers "F.Cu" "F.Paste" "F.Mask") (net 39 "RST"))
@@ -2568,7 +2570,7 @@
 
   (footprint "ceoloide:reset_switch_smd_side"
     (layer "F.Cu")
-    (at 203.5 49.394499999999994 0)
+    (at 203.5 49.69449999999999 0)
     (property "Reference" "RST2"
       (at 0 0 0)
       (layer "F.SilkS")
@@ -2583,6 +2585,9 @@
     (fp_line (start -1.3 -2.75) (end 1.3 -2.75) (stroke (width 0.1) (type solid)) (layer "Dwgs.User"))
     (fp_line (start 1.3 -2.75) (end 1.3 -1.75) (stroke (width 0.1) (type solid)) (layer "Dwgs.User"))
     (fp_line (start 2.35 -1.75) (end 2.35 1.75) (stroke (width 0.1) (type solid)) (layer "Dwgs.User"))
+    
+    (pad "" np_thru_hole circle (at 0 -1.375 180) (size 0.75 0.75) (drill 0.75) (layers "*.Cu" "*.Mask"))
+    (pad "" np_thru_hole circle (at 0 1.375 180) (size 0.75 0.75) (drill 0.75) (layers "*.Cu" "*.Mask"))
     
     (pad "1" smd rect (at 2.625 -0.85 180) (size 1.55 1) (layers "F.Cu" "F.Paste" "F.Mask") (net 38 "GND"))
     (pad "2" smd rect (at 2.625 0.85 180) (size 1.55 1) (layers "F.Cu" "F.Paste" "F.Mask") (net 39 "RST"))
@@ -2617,20 +2622,20 @@
     (fp_line (start 6.41 15.37) (end 6.41 18.03) (layer "F.SilkS") (stroke (width 0.12) (type solid)))
     (fp_line (start 6.41 15.37) (end -6.41 15.37) (layer "F.SilkS") (stroke (width 0.12) (type solid)))
     
-    (fp_text user "DA" (at -5.08 13.1 -90) (layer "F.SilkS")
-      (effects (font (size 1 1) (thickness 0.15)))
+    (fp_text user "P017" (at -5.08 18.5 0) (unlocked yes) (layer "F.SilkS")
+      (effects (font (size 1 1) (thickness 0.15)) (justify right))
     )
-    (fp_text user "CS" (at 5.12 13.1 -90) (layer "F.SilkS")
-      (effects (font (size 1 1) (thickness 0.15)))
+    (fp_text user "P020" (at -2.48 18.5 0) (unlocked yes) (layer "F.SilkS")
+      (effects (font (size 1 1) (thickness 0.15)) (justify right))
     )
-    (fp_text user "GND" (at 2.62 13.1 -90) (layer "F.SilkS")
-      (effects (font (size 1 1) (thickness 0.15)))
+    (fp_text user "VCC" (at 0.15 18.5 0) (unlocked yes) (layer "F.SilkS")
+      (effects (font (size 1 1) (thickness 0.15)) (justify right))
     )
-    (fp_text user "VCC" (at 0.15 14.6 -90) (layer "F.SilkS")
-      (effects (font (size 1 1) (thickness 0.15)))
+    (fp_text user "GND" (at 2.62 18.5 0) (unlocked yes) (layer "F.SilkS")
+      (effects (font (size 1 1) (thickness 0.15)) (justify right))
     )
-    (fp_text user "CL" (at -2.48 13.1 -90) (layer "F.SilkS")
-      (effects (font (size 1 1) (thickness 0.15)))
+    (fp_text user "P022" (at 5.12 18.5 0) (unlocked yes) (layer "F.SilkS")
+      (effects (font (size 1 1) (thickness 0.15)) (justify right))
     )
     
     (fp_line (start 6.88 14.9) (end 6.88 18.45) (layer "F.CrtYd") (stroke (width 0.15) (type solid)))
@@ -2638,11 +2643,11 @@
     (fp_line (start -6.82 18.45) (end -6.82 14.9) (layer "F.CrtYd") (stroke (width 0.15) (type solid)))
     (fp_line (start -6.82 14.9) (end 6.88 14.9) (layer "F.CrtYd") (stroke (width 0.15) (type solid)))
     
-    (pad "1" smd oval (at -5.08 16.7 180) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") (net 67 "P02"))
-    (pad "2" smd oval (at -2.54 16.7 180) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") (net 38 "GND"))
-    (pad "3" smd oval (at 0 16.7 180) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") (net 40 "VCC"))
-    (pad "4" smd oval (at 2.54 16.7 180) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") (net 42 "P029"))
-    (pad "5" smd circle (at 5.08 16.7 180) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") (net 41 "P031"))
+    (pad "1" thru_hole oval (at -5.08 16.7 180) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (net 51 "P017"))
+    (pad "2" thru_hole oval (at -2.54 16.7 180) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (net 52 "P020"))
+    (pad "3" thru_hole oval (at 0 16.7 180) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (net 40 "VCC"))
+    (pad "4" thru_hole oval (at 2.54 16.7 180) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (net 38 "GND"))
+    (pad "5" thru_hole circle (at 5.08 16.7 180) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (net 53 "P022"))
 
     (fp_line (start 5.4 13.4) (end 5.4 -11.9) (layer Dwgs.User) (stroke (width 0.15) (type solid)))
     (fp_line (start -5.4 13.4) (end -5.4 -11.9) (layer Dwgs.User) (stroke (width 0.15) (type solid)))
@@ -2672,20 +2677,20 @@
     (fp_line (start 6.41 15.37) (end 6.41 18.03) (layer "F.SilkS") (stroke (width 0.12) (type solid)))
     (fp_line (start 6.41 15.37) (end -6.41 15.37) (layer "F.SilkS") (stroke (width 0.12) (type solid)))
     
-    (fp_text user "DA" (at -5.08 13.1 90) (layer "F.SilkS")
-      (effects (font (size 1 1) (thickness 0.15)))
+    (fp_text user "P017" (at -5.08 18.5 180) (unlocked yes) (layer "F.SilkS")
+      (effects (font (size 1 1) (thickness 0.15)) (justify right))
     )
-    (fp_text user "CS" (at 5.12 13.1 90) (layer "F.SilkS")
-      (effects (font (size 1 1) (thickness 0.15)))
+    (fp_text user "P020" (at -2.48 18.5 180) (unlocked yes) (layer "F.SilkS")
+      (effects (font (size 1 1) (thickness 0.15)) (justify right))
     )
-    (fp_text user "GND" (at 2.62 13.1 90) (layer "F.SilkS")
-      (effects (font (size 1 1) (thickness 0.15)))
+    (fp_text user "VCC" (at 0.15 18.5 180) (unlocked yes) (layer "F.SilkS")
+      (effects (font (size 1 1) (thickness 0.15)) (justify right))
     )
-    (fp_text user "VCC" (at 0.15 14.6 90) (layer "F.SilkS")
-      (effects (font (size 1 1) (thickness 0.15)))
+    (fp_text user "GND" (at 2.62 18.5 180) (unlocked yes) (layer "F.SilkS")
+      (effects (font (size 1 1) (thickness 0.15)) (justify right))
     )
-    (fp_text user "CL" (at -2.48 13.1 90) (layer "F.SilkS")
-      (effects (font (size 1 1) (thickness 0.15)))
+    (fp_text user "P022" (at 5.12 18.5 180) (unlocked yes) (layer "F.SilkS")
+      (effects (font (size 1 1) (thickness 0.15)) (justify right))
     )
     
     (fp_line (start 6.88 14.9) (end 6.88 18.45) (layer "F.CrtYd") (stroke (width 0.15) (type solid)))
@@ -2693,11 +2698,11 @@
     (fp_line (start -6.82 18.45) (end -6.82 14.9) (layer "F.CrtYd") (stroke (width 0.15) (type solid)))
     (fp_line (start -6.82 14.9) (end 6.88 14.9) (layer "F.CrtYd") (stroke (width 0.15) (type solid)))
     
-    (pad "1" smd oval (at -5.08 16.7 360) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") (net 67 "P02"))
-    (pad "2" smd oval (at -2.54 16.7 360) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") (net 38 "GND"))
-    (pad "3" smd oval (at 0 16.7 360) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") (net 40 "VCC"))
-    (pad "4" smd oval (at 2.54 16.7 360) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") (net 42 "P029"))
-    (pad "5" smd circle (at 5.08 16.7 360) (size 1.7 1.7) (drill 1) (layers "F.Cu" "F.Mask") (net 41 "P031"))
+    (pad "1" thru_hole oval (at -5.08 16.7 360) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (net 51 "P017"))
+    (pad "2" thru_hole oval (at -2.54 16.7 360) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (net 52 "P020"))
+    (pad "3" thru_hole oval (at 0 16.7 360) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (net 40 "VCC"))
+    (pad "4" thru_hole oval (at 2.54 16.7 360) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (net 38 "GND"))
+    (pad "5" thru_hole circle (at 5.08 16.7 360) (size 1.7 1.7) (drill 1) (layers "*.Cu" "*.Mask") (net 53 "P022"))
 
     (fp_line (start 5.4 13.4) (end 5.4 -11.9) (layer Dwgs.User) (stroke (width 0.15) (type solid)))
     (fp_line (start -5.4 13.4) (end -5.4 -11.9) (layer Dwgs.User) (stroke (width 0.15) (type solid)))
@@ -2713,7 +2718,7 @@
 
   (footprint "ceoloide:mounting_hole_plated"
     (layer "F.Cu")
-    (at 130.1 50.394499999999994 0)
+    (at 130.1 50.69449999999999 0)
     (property "Reference" "H1"
       (at 0 3 0)
       (layer "F.SilkS")
@@ -2731,7 +2736,7 @@
 
   (footprint "ceoloide:mounting_hole_plated"
     (layer "F.Cu")
-    (at 160.3 50.394499999999994 0)
+    (at 160.3 50.69449999999999 0)
     (property "Reference" "H2"
       (at 0 3 0)
       (layer "F.SilkS")
@@ -2767,7 +2772,7 @@
 
   (footprint "ceoloide:mounting_hole_plated"
     (layer "F.Cu")
-    (at 211.9 50.394499999999994 0)
+    (at 211.9 50.69449999999999 0)
     (property "Reference" "H4"
       (at 0 3 0)
       (layer "F.SilkS")
@@ -2785,7 +2790,7 @@
 
   (footprint "ceoloide:mounting_hole_plated"
     (layer "F.Cu")
-    (at 181.7 50.394499999999994 0)
+    (at 181.7 50.69449999999999 0)
     (property "Reference" "H5"
       (at 0 3 0)
       (layer "F.SilkS")

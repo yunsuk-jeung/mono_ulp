@@ -60,7 +60,7 @@ units:
 
   #reset_ref: controller
   reset_rel_x: -8
-  reset_rel_y: nicenano_width / 2 + 4
+  reset_rel_y: nicenano_width / 2 + 4 - 0.3
   reset_rotation: 0
 
   #power_ref: reset
@@ -568,6 +568,8 @@ pcbs:
       reset:
         what: reset_switch_smd_side
         where: reset
+        params:
+          include_bosses: true
         asym: both
         adjust.rotate: reset_rotation
 
@@ -575,9 +577,9 @@ pcbs:
         what: display_nice_view
         where: niceview
         params:
-          CS: P002
-          SCK: P029
-          MOSI: P31
+          CS: P022
+          SCK: P020
+          MOSI: P017
         asym: both
         adjust.rotate: niceview_rotation
 

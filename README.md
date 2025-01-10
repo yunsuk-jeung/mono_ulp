@@ -1,9 +1,10 @@
 ## n36tsu
 
-- bluetooth
 - 36 keys
 - PG1316S
-- niceview
+- nice!view
+- nice!nano
+- wireless
 
 ![PCB](images/pcb.png)
 

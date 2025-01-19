@@ -1,4 +1,5 @@
-## n36tsu
+## n36tsu keyboard
+
 
 - 36 keys
 - PG1316S
@@ -6,6 +7,9 @@
 - nice!nano
 - wireless
 
+![left](images/left.jpg)
+![side](images/side.jpg)
+![ulp](images/ulp.jpg)
 ![PCB](images/pcb.png)
 
 ## TODO

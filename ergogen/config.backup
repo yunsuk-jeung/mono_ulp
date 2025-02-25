@@ -1,0 +1,597 @@
+meta:
+  engine: 4.1.0
+  version: 0.0.1
+  author: n1tsu
+
+units:
+  # keys
+  keycaps_size: 16
+  keycaps_padding: 1
+  qcol_stagger: 0U
+  wcol_stagger: 0.66U
+  ecol_stagger: 0.25U
+  rcol_stagger: -0.25U
+  tcol_stagger: -0.15U
+  thumb_splay: -10
+
+  # case
+  case_edge_size: 0
+
+  # components
+  components_padding: 4
+  nicenano_width: 17.78
+  nicenano_height: 33
+  battery_width: 12
+  battery_height: 30
+  niceview_width: 14
+  niceview_height: 30
+  battery_connector_width: 0.4U # !
+  battery_connector_height: 0.8U # !
+  power_width: 2.7
+  power_height: 7.8
+  power_button_size: 1.5
+  reset_width: 4.5
+  reset_height: 6.4
+
+  # relative placement
+  # thumb_ref: matrix_tcolumn_zrow
+  thumb_rel_x: -1.2U
+  thumb_rel_y: -1.0U
+
+  #controller_ref: matrix_tcolumn_qrow
+  controller_rel_x: nicenano_height / 2 + keycaps_size / 2 + components_padding
+  controller_rel_y: -6
+  controller_rotation: -90
+
+  #niceview_ref: controller
+  niceview_rel_x: 0
+  niceview_rel_y: -nicenano_width
+  niceview_rotation: -90
+
+  #battery_ref: niceview
+  battery_rel_x: -4
+  battery_rel_y: -niceview_width
+  battery_rotation: 90
+
+  #battery_connector_ref: battery
+  battery_connector_rel_x: 2
+  battery_connector_rel_y: -battery_width + 2
+  battery_connector_rotation: 90
+
+  #reset_ref: controller
+  reset_rel_x: -8
+  reset_rel_y: nicenano_width / 2 + 4 - 0.3
+  reset_rotation: 0
+
+  #power_ref: reset
+  power_rel_x: 12
+  power_rel_y: 0
+  power_rotation: 0
+
+points:
+  zones:
+    matrix:
+      key:
+        spread: keycaps_size + keycaps_padding
+        tags: "keys"
+      anchor.shift: [50, -100]
+      columns:
+        qcolumn.key.stagger: qcol_stagger
+        wcolumn.key.stagger: wcol_stagger
+        ecolumn.key.stagger: ecol_stagger
+        rcolumn.key.stagger: rcol_stagger
+        tcolumn.key.stagger: tcol_stagger
+      rows:
+        zrow.padding: keycaps_size + keycaps_padding
+        arow.padding: keycaps_size + keycaps_padding
+        qrow.padding: keycaps_size + keycaps_padding
+
+    thumb:
+      key.tags: "keys"
+      anchor:
+        ref: matrix_tcolumn_zrow
+        shift: [thumb_rel_x, thumb_rel_y]
+      columns:
+        inner:
+        middle.key:
+          splay: thumb_splay
+          origin: [-0.5U, -0.5U]
+
+        outer.key:
+          splay: thumb_splay
+          origin: [-0.5U, -0.5U]
+
+    controller:
+      anchor:
+        ref: matrix_tcolumn_qrow
+        shift: [controller_rel_x, controller_rel_y]
+
+    niceview:
+      anchor:
+        ref: controller
+        shift: [niceview_rel_x, niceview_rel_y]
+
+    battery:
+      anchor:
+        ref: niceview
+        shift: [battery_rel_x, battery_rel_y]
+
+    battery_connector:
+      anchor:
+        ref: battery
+        shift: [battery_connector_rel_x, battery_connector_rel_y]
+
+    reset:
+      anchor:
+        ref: controller
+        shift: [reset_rel_x, reset_rel_y]
+
+    power:
+      anchor:
+        ref: reset
+        shift: [power_rel_x, power_rel_y]
+
+    hole_up_left:
+      key.tags: "holes"
+      anchor:
+        ref: reset
+        shift: [-reset_height - 2, -1]
+    hole_up_right:
+      key.tags: "holes"
+      anchor:
+        ref: power
+        shift: [power_height + 2, -1]
+    hole_down_left:
+      key.tags: "holes"
+      anchor:
+        ref: battery_connector
+        shift: [-battery_connector_height / 2, 0]
+
+    text:
+      anchor:
+        ref: matrix_ecolumn_zrow
+        shift: [0, -keycaps_size / 2 - 3]
+
+  mirror:
+    ref: matrix_rcolumn_arow
+    distance: 140
+
+outlines:
+  keycaps:
+    - what: rectangle
+      where: keys
+      size: keycaps_size
+      asym: both
+
+  controller:
+    - what: rectangle
+      where: controller
+      size: [nicenano_width, nicenano_height]
+      asym: both
+      adjust.rotate: controller_rotation
+
+  battery:
+    - what: rectangle
+      where: battery
+      size: [battery_width, battery_height]
+      asym: both
+      adjust.rotate: battery_rotation
+
+  niceview:
+    - what: rectangle
+      where: niceview
+      size: [niceview_width, niceview_height]
+      asym: both
+      adjust.rotate: niceview_rotation
+
+  battery_connector:
+    - what: rectangle
+      where: battery_connector
+      size: [battery_connector_width, battery_connector_height]
+      asym: both
+      adjust.rotate: battery_connector_rotation
+
+  power:
+    - what: rectangle
+      where: power
+      size: [power_width, power_height]
+      asym: both
+
+  reset:
+    - what: rectangle
+      where: reset
+      size: [reset_width, reset_height]
+      asym: both
+
+  # BOARD OUTLINE
+  board:
+    - what: polygon
+      operation: stack
+      fillet: 1.5
+      points:
+        # Upper left
+        - ref: matrix_qcolumn_qrow
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: matrix_qcolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 - case_edge_size + keycaps_padding / 2,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: matrix_wcolumn_qrow
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: matrix_wcolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 - case_edge_size + keycaps_padding / 2,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: matrix_ecolumn_qrow
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: matrix_ecolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: matrix_rcolumn_qrow
+          shift:
+            [
+              -(keycaps_size / 2 - case_edge_size + keycaps_padding / 2),
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: matrix_rcolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: matrix_tcolumn_qrow
+          shift:
+            [
+              -(keycaps_size / 2 - case_edge_size + keycaps_padding / 2),
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        # Upper right
+        - ref: matrix_tcolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 + keycaps_padding + 1,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: matrix_tcolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 + keycaps_padding + nicenano_height + components_padding + 1,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: matrix_tcolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 + keycaps_padding + nicenano_height + components_padding + 1,
+              keycaps_size / 2 + - (nicenano_width + battery_width + niceview_width + battery_connector_width + 4),
+            ]
+        # Lower right
+        - ref: thumb_outer
+          shift:
+            [
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: thumb_outer
+          shift:
+            [
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+            ]
+        - ref: thumb_outer
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size),
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+            ]
+        - ref: thumb_middle
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size),
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+            ]
+        - ref: thumb_inner
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size),
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+            ]
+        - ref: thumb_inner
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size),
+              -(thumb_rel_y + case_edge_size + keycaps_padding + ecol_stagger),
+            ]
+        - ref: matrix_wcolumn_zrow
+          shift:
+            [
+              -(keycaps_size / 2 - case_edge_size + keycaps_padding / 2),
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+            ]
+        - ref: matrix_qcolumn_zrow
+          shift:
+            [
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+            ]
+        # Lower left
+        - ref: matrix_qcolumn_zrow
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+            ]
+
+    - what: polygon
+      operation: stack
+      fillet: 1.5
+      points:
+        # Upper left
+        - ref: mirror_matrix_qcolumn_qrow
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: mirror_matrix_qcolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 - case_edge_size + keycaps_padding / 2,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: mirror_matrix_wcolumn_qrow
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: mirror_matrix_wcolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 - case_edge_size + keycaps_padding / 2,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: mirror_matrix_ecolumn_qrow
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: mirror_matrix_ecolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: mirror_matrix_rcolumn_qrow
+          shift:
+            [
+              -(keycaps_size / 2 - case_edge_size + keycaps_padding / 2),
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: mirror_matrix_rcolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: mirror_matrix_tcolumn_qrow
+          shift:
+            [
+              -(keycaps_size / 2 - case_edge_size + keycaps_padding / 2),
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        # Upper right
+        - ref: mirror_matrix_tcolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 + keycaps_padding + 1,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: mirror_matrix_tcolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 + keycaps_padding + nicenano_height + components_padding + 1,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: mirror_matrix_tcolumn_qrow
+          shift:
+            [
+              keycaps_size / 2 + keycaps_padding + nicenano_height + components_padding + 1,
+              keycaps_size / 2 + - (nicenano_width + battery_width + niceview_width + battery_connector_width + 4),
+            ]
+        # Lower right
+        - ref: mirror_thumb_outer
+          shift:
+            [
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+            ]
+        - ref: mirror_thumb_outer
+          shift:
+            [
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+            ]
+        - ref: mirror_thumb_outer
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size),
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+            ]
+        - ref: mirror_thumb_middle
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size),
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+            ]
+        - ref: mirror_thumb_inner
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size),
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+            ]
+        - ref: mirror_thumb_inner
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size),
+              -(thumb_rel_y + case_edge_size + keycaps_padding + ecol_stagger),
+            ]
+        - ref: mirror_matrix_wcolumn_zrow
+          shift:
+            [
+              -(keycaps_size / 2 - case_edge_size + keycaps_padding / 2),
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+            ]
+        - ref: mirror_matrix_qcolumn_zrow
+          shift:
+            [
+              keycaps_size / 2 + case_edge_size + keycaps_padding / 2,
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+            ]
+        # Lower left
+        - ref: mirror_matrix_qcolumn_zrow
+          shift:
+            [
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+              -(keycaps_size / 2 + case_edge_size + keycaps_padding / 2),
+            ]
+
+  combo:
+    - operation: stack
+      name: keycaps
+    - operation: stack
+      name: board
+    - operation: stack
+      name: controller
+    - operation: stack
+      name: battery
+    - operation: stack
+      name: battery_connector
+    - operation: stack
+      name: niceview
+    - operation: stack
+      name: power
+    - operation: stack
+      name: reset
+
+pcbs:
+  main_pcb:
+    outlines:
+      main:
+        outline: board
+      battery:
+        outline: battery
+        layer: "F.SilkS"
+
+    template: kicad8
+    footprints:
+      switch:
+        what: pg1316s
+        where: keys
+        params:
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+
+      diodes_left:
+        what: diode_tht_sod123
+        where: /^matrix_.*|^thumb_.*/
+        params:
+          side: "F"
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0.3, 2.4]
+      diodes_right:
+        what: diode_tht_sod123
+        where: /^mirror_matrix_.*|^mirror_thumb_.*/
+        params:
+          side: "F"
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [-0.3, 2.4]
+
+      # controller footprints isn't mirrored
+      controller_left:
+        what: nicenano
+        where: controller
+        params:
+          orientation: up
+        # PCB controller is 90 oriented by default
+        adjust.rotate: -90 + controller_rotation
+      controller_right:
+        what: nicenano
+        where: mirror_controller
+        params:
+          orientation: up
+        # PCB controller is 90 oriented by default
+        # PCB controller is 90 oriented by default
+        adjust.rotate: -90 + controller_rotation + 180
+
+      battery_connector:
+        what: battery_connector_jst_ph_2
+        where: battery_connector
+        asym: both
+        adjust.rotate: battery_connector_rotation
+
+      # controller footprints isn't mirrored
+      power_left:
+        what: power_switch_smd_side
+        where: power
+        # PCB power switch is 90 oriented by default
+        adjust.rotate: -90 + power_rotation + 180
+      power_right:
+        what: power_switch_smd_side
+        where: mirror_power
+        # PCB power switch is 90 oriented by default
+        adjust.rotate: -90 + power_rotation
+
+      reset:
+        what: reset_switch_smd_side
+        where: reset
+        params:
+          include_bosses: true
+        asym: both
+        adjust.rotate: reset_rotation
+
+      niceview:
+        what: display_nice_view
+        where: niceview
+        params:
+          CS: P022
+          SCK: P020
+          MOSI: P017
+        asym: both
+        adjust.rotate: niceview_rotation
+
+      holes:
+        what: mounting_hole_plated
+        where: holes
+
+      text:
+        what: utility_text
+        where: text
+        asym: both
+        params:
+          side: "F"
+          mirrored: false
+          text: "n36tsu v0.1.0"

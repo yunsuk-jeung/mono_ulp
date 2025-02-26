@@ -7,7 +7,8 @@ units:
   # keys
   ks: 16
   kp: 1
-  px: ks + kp + 5
+  pp: 5
+  px: ks + kp + pp
   # px: 0
   qcol_stagger: 0U
   wcol_stagger: 0.66U
@@ -15,9 +16,9 @@ units:
   rcol_stagger: -0.25U
   tcol_stagger: -0.15U
   thumb_splay: 0
-  mirror_splay: -20
+  mirror_splay: -15
   # mirror_splay: 0
-  mirror_dist: 105
+  mirror_dist: 50
 
   # case
   case_edge_size: 0
@@ -77,21 +78,64 @@ points:
         outer.key:
           shift: [0, tcol_stagger+tcol_stagger]
 
-    unrotated:
+    matrix_tcol_qrow_unrotated:
+      key.tags:
+        - helper
       anchor:
-        ref: matrix_rcol_zrow
+        ref: matrix_tcol_qrow
+        # shift: [0.5(ks+kp), 0.5(ks+kp)]
         rotate: -mirror_splay
-        shift: [0, 0]
+
+    matrix_tcol_qrow_directing_right:
+      key.tags:
+        - helper
+      anchor:
+        ref: matrix_tcol_qrow
+        shift: [0.5px, 0.5px]
+        rotate: -90-mirror_splay
+
+    center:
+      key.tags:
+        - helper
+      anchor:
+        ref: matrix_tcol_qrow_unrotated
+        shift: [0.5 mirror_dist, -50]
+
+    controller_top_rotated:
+      key.tags:
+        - helper
+      anchor:
+        - aggregate:
+            method: intersect
+            parts:
+              - ref: matrix_tcol_qrow_directing_right
+              - ref: center
+
+    controller_top:
+      key.tags:
+        - helper
+      anchor:
+        ref: controller_top_rotated
+        rotate: -mirror_splay
 
     controller_center:
+      key.tags:
+        - helper
       anchor:
-        ref: unrotated
-        rotate: -90
-        shift: [0.5 mirror_dist, 0]
+        ref: controller_top
+        shift: [0, -17]
+
+    battery_center:
+      key.tags:
+        - helper
+      anchor:
+        ref: controller_center
+        shift: [0, -25]
+        rotate: 90
 
   rotate: mirror_splay
   mirror:
-    ref: matrix_rcol_zrow
+    ref: matrix_tcol_qrow
     distance: mirror_dist
 
 outlines:
@@ -108,10 +152,15 @@ outlines:
       # asym: both
       # adjust.rotate: controller_rotation
 
+  battery:
+    - what: rectangle
+      where: battery_center
+      size: [battery_width, battery_height]
+
   plate:
     - what: polygon
       operation: stack
-      fillet: 5
+      fillet: 2
       points:
         - ref: matrix_qcol_qrow
           shift: [-0.5px, 0.5px]
@@ -122,6 +171,14 @@ outlines:
         - ref: matrix_ecol_qrow
           shift: [0.5px, 0.5px]
         - ref: matrix_rcol_qrow
+          shift: [0.5px, 0.5px]
+        - ref: matrix_tcol_qrow
+          shift: [0.5px, 0.5px]
+
+        # - ref: controller_center
+        #   shift: [0, 0]
+
+        - ref: mirror_matrix_tcol_qrow
           shift: [0.5px, 0.5px]
         - ref: mirror_matrix_rcol_qrow
           shift: [0.5px, 0.5px]
@@ -135,6 +192,16 @@ outlines:
           shift: [-0.5px, 0.5px]
         - ref: mirror_matrix_qcol_zrow
           shift: [-0.5px, -0.5px]
+        - ref: mirror_matrix_qcol_zrow
+          shift: [0.5px, -0.5px]
+        - ref: mirror_matrix_qcol_zrow
+          shift: [0.5px, -0.5px + wcol_stagger]
+        - ref: mirror_matrix_wcol_zrow
+          shift: [0.5px, -0.5px]
+        - ref: mirror_matrix_wcol_zrow
+          shift: [0.5px, -0.5px + ecol_stagger]
+        - ref: mirror_matrix_rcol_zrow
+          shift: [-0.5px, -0.5px - rcol_stagger]
         - ref: mirror_thumb_inner
           shift: [-0.5px, -0.5px]
         - ref: mirror_thumb_outer
@@ -155,6 +222,10 @@ outlines:
       name: plate
     - operation: subtract
       name: keycaps
+    - operation: subtract
+      name: controller
+    - operation: subtract
+      name: battery
 
 pcbs:
   main_pcb:

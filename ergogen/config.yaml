@@ -133,6 +133,14 @@ points:
         shift: [0, -25]
         rotate: 90
 
+    battery_connector_center:
+      key.tags:
+        - helper
+      anchor:
+        ref: controller_center
+        shift: [0, -25-10]
+        rotate: 90
+
   rotate: mirror_splay
   mirror:
     ref: matrix_tcol_qrow
@@ -157,6 +165,12 @@ outlines:
       where: battery_center
       size: [battery_width, battery_height]
 
+  battery_connector:
+    - what: rectangle
+      where: battery_connector_center
+      size: [battery_connector_width, battery_connector_height]
+      # adjust.rotate: battery_connector_rotation
+
   plate:
     - what: polygon
       operation: stack
@@ -170,8 +184,8 @@ outlines:
           shift: [-0.5px, 0.5px]
         - ref: matrix_ecol_qrow
           shift: [0.5px, 0.5px]
-        - ref: matrix_rcol_qrow
-          shift: [0.5px, 0.5px]
+        # - ref: matrix_rcol_qrow
+        #   shift: [0.5px, 0.5px]
         - ref: matrix_tcol_qrow
           shift: [0.5px, 0.5px]
 
@@ -180,8 +194,8 @@ outlines:
 
         - ref: mirror_matrix_tcol_qrow
           shift: [0.5px, 0.5px]
-        - ref: mirror_matrix_rcol_qrow
-          shift: [0.5px, 0.5px]
+        # - ref: mirror_matrix_rcol_qrow
+        #   shift: [0.5px, 0.5px]
         - ref: mirror_matrix_ecol_qrow
           shift: [0.5px, 0.5px]
         - ref: mirror_matrix_ecol_qrow
@@ -190,24 +204,33 @@ outlines:
           shift: [-0.5px, 0.5px]
         - ref: mirror_matrix_qcol_qrow
           shift: [-0.5px, 0.5px]
+
         - ref: mirror_matrix_qcol_zrow
           shift: [-0.5px, -0.5px]
         - ref: mirror_matrix_qcol_zrow
           shift: [0.5px, -0.5px]
         - ref: mirror_matrix_qcol_zrow
           shift: [0.5px, -0.5px + wcol_stagger]
-        - ref: mirror_matrix_wcol_zrow
-          shift: [0.5px, -0.5px]
-        - ref: mirror_matrix_wcol_zrow
-          shift: [0.5px, -0.5px + ecol_stagger]
-        - ref: mirror_matrix_rcol_zrow
-          shift: [-0.5px, -0.5px - rcol_stagger]
+        - ref: mirror_matrix_qcol_zrow
+          shift: [ 3ks+3kp - 0.5px , -0.5px + wcol_stagger]
+        # - ref: mirror_matrix_wcol_zrow
+        #   shift: [0.5px, -0.5px]
+        # - ref: mirror_matrix_wcol_zrow
+        #   shift: [0.5px, -0.5px + ecol_stagger]
+        # - ref: mirror_matrix_rcol_zrow
+        #   shift: [-0.5px, -0.5px - rcol_stagger]
+        # - ref: mirror_thumb_inner
+        #   shift: [-0.5px, 0.5px -( wcol_stagger + ecol_stagger + rcol_stagger)]
         - ref: mirror_thumb_inner
           shift: [-0.5px, -0.5px]
         - ref: mirror_thumb_outer
           shift: [-0.5px, -0.5px]
         - ref: mirror_thumb_outer
           shift: [0.5px, -0.5px]
+        - ref: mirror_thumb_outer
+          shift: [0.5px, 0.5px]
+        - ref: thumb_outer
+          shift: [0.5px, 0.5px]
         - ref: thumb_outer
           shift: [0.5px, -0.5px]
         - ref: thumb_outer
@@ -215,7 +238,27 @@ outlines:
         - ref: thumb_inner
           shift: [-0.5px, -0.5px]
         - ref: matrix_qcol_zrow
+          shift: [ 3ks+3kp - 0.5px , -0.5px + wcol_stagger]
+        - ref: matrix_qcol_zrow
+          shift: [0.5px, -0.5px + wcol_stagger]
+        - ref: matrix_qcol_zrow 
+          shift: [0.5px, -0.5px]
+        - ref: matrix_qcol_zrow
           shift: [-0.5px, -0.5px]
+
+  aaaa:
+    - what: polygon
+      operation: stack
+      fillet: 2
+      points:
+        - ref: matrix_wcol_zrow
+          shift: [0, -0.5px]
+        - ref: matrix_wcol_zrow
+          shift: [0, -5px]
+        - ref: matrix_ecol_zrow
+          shift: [0, -5px]
+        - ref: matrix_ecol_zrow
+          shift: [0, -0.5px]
 
   combo:
     - operation: stack
@@ -226,6 +269,8 @@ outlines:
       name: controller
     - operation: subtract
       name: battery
+    - operation: subtract
+      name: battery_connector
 
 pcbs:
   main_pcb:

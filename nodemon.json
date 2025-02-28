@@ -1,0 +1,7 @@
+{
+  "watch": [
+    "./ergogen/**"
+  ],
+  "ext": "yaml, js",
+  "exec": "./build.sh"
+}

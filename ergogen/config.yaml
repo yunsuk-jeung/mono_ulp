@@ -7,8 +7,9 @@ units:
   # keys
   ks: 16
   kp: 1
-  pp: 5
-  px: ks + kp + pp
+  kx: ks+kp
+  hkx: 0.5kx
+  pp: 2 #pcb padding
   # px: 0
   qcol_stagger: 0U
   wcol_stagger: 0.66U
@@ -36,8 +37,8 @@ units:
   power_width: 2.7
   power_height: 7.8
   power_button_size: 1.5
-  reset_width: 4.5
-  reset_height: 6.4
+  reset_width: 8
+  reset_height: 3.5
 
 points:
   zones:
@@ -78,7 +79,7 @@ points:
         outer.key:
           shift: [0, tcol_stagger+tcol_stagger]
 
-    matrix_tcol_qrow_unrotated:
+    helper_tcol_qrow_unrotated:
       key.tags:
         - helper
       anchor:
@@ -86,19 +87,19 @@ points:
         # shift: [0.5(ks+kp), 0.5(ks+kp)]
         rotate: -mirror_splay
 
-    matrix_tcol_qrow_directing_right:
+    helper_tcol_qrow_directing_right:
       key.tags:
         - helper
       anchor:
         ref: matrix_tcol_qrow
-        shift: [0.5px, 0.5px]
+        shift: [(hkx+pp), (hkx+pp)]
         rotate: -90-mirror_splay
 
     center:
       key.tags:
         - helper
       anchor:
-        ref: matrix_tcol_qrow_unrotated
+        ref: helper_tcol_qrow_unrotated
         shift: [0.5 mirror_dist, -50]
 
     controller_top_rotated:
@@ -108,7 +109,7 @@ points:
         - aggregate:
             method: intersect
             parts:
-              - ref: matrix_tcol_qrow_directing_right
+              - ref: helper_tcol_qrow_directing_right
               - ref: center
 
     controller_top:
@@ -134,6 +135,34 @@ points:
         rotate: 90
 
     battery_connector_center:
+      key.tags:
+        - helper
+      anchor:
+        ref: controller_center
+        shift: [5, -25-10]
+
+    battery_connector_plus:
+      key.tags:
+        - helper
+      anchor:
+        ref: battery_connector_center
+        shift: [5, 0]
+
+    battery_connector_minus:
+      key.tags:
+        - helper
+      anchor:
+        ref: battery_connector_center
+        shift: [10, 0]
+
+    reset_center:
+      key.tags:
+        - helper
+      anchor:
+        ref: controller_center
+        shift: [-15, -25-10]
+
+    power_center:
       key.tags:
         - helper
       anchor:
@@ -171,94 +200,105 @@ outlines:
       size: [battery_connector_width, battery_connector_height]
       # adjust.rotate: battery_connector_rotation
 
+  power:
+    - what: rectangle
+      where: power_center
+      size: [power_width, power_height]
+  reset:
+    - what: rectangle
+      where: reset_center
+      size: [reset_width, reset_height]
+
   plate:
     - what: polygon
       operation: stack
-      fillet: 2
+      fillet: 1
       points:
         - ref: matrix_qcol_qrow
-          shift: [-0.5px, 0.5px]
+          shift: [-hkx-pp, hkx+pp]
+        - ref: matrix_qcol_qrow
+          shift: [hkx-pp, hkx+pp]
         - ref: matrix_wcol_qrow
-          shift: [-0.5px, 0.5px]
+          shift: [-hkx-pp, hkx+pp]
+        - ref: matrix_wcol_qrow
+          shift: [hkx-pp, hkx+pp]
         - ref: matrix_ecol_qrow
-          shift: [-0.5px, 0.5px]
+          shift: [-hkx-pp, hkx+pp]
         - ref: matrix_ecol_qrow
-          shift: [0.5px, 0.5px]
-        # - ref: matrix_rcol_qrow
-        #   shift: [0.5px, 0.5px]
+          shift: [hkx+pp, hkx+pp]
+        - ref: matrix_rcol_qrow
+          shift: [-hkx+pp, hkx+pp]
+        - ref: matrix_rcol_qrow
+          shift: [hkx+pp, hkx+pp]
         - ref: matrix_tcol_qrow
-          shift: [0.5px, 0.5px]
+          shift: [-hkx+pp, hkx+pp]
+        - ref: matrix_tcol_qrow
+          shift: [hkx+pp, hkx+pp]
 
         # - ref: controller_center
         #   shift: [0, 0]
 
         - ref: mirror_matrix_tcol_qrow
-          shift: [0.5px, 0.5px]
-        # - ref: mirror_matrix_rcol_qrow
-        #   shift: [0.5px, 0.5px]
+          shift: [hkx+pp, hkx+pp]
+        - ref: mirror_matrix_tcol_qrow
+          shift: [-hkx+pp, hkx+pp]
+        - ref: mirror_matrix_rcol_qrow
+          shift: [hkx+pp, hkx+pp]
+        - ref: mirror_matrix_rcol_qrow
+          shift: [-hkx+pp, hkx+pp]
         - ref: mirror_matrix_ecol_qrow
-          shift: [0.5px, 0.5px]
+          shift: [hkx+pp, hkx+pp]
         - ref: mirror_matrix_ecol_qrow
-          shift: [-0.5px, 0.5px]
+          shift: [-hkx-pp, hkx+pp]
         - ref: mirror_matrix_wcol_qrow
-          shift: [-0.5px, 0.5px]
+          shift: [hkx-pp, hkx+pp]
+        - ref: mirror_matrix_wcol_qrow
+          shift: [-hkx-pp, hkx+pp]
         - ref: mirror_matrix_qcol_qrow
-          shift: [-0.5px, 0.5px]
+          shift: [hkx-pp, hkx+pp]
+        - ref: mirror_matrix_qcol_qrow
+          shift: [-hkx-pp, hkx+pp]
 
         - ref: mirror_matrix_qcol_zrow
-          shift: [-0.5px, -0.5px]
+          shift: [-(hkx+pp), -(hkx+pp)]
         - ref: mirror_matrix_qcol_zrow
-          shift: [0.5px, -0.5px]
+          shift: [(hkx+pp), -(hkx+pp)]
         - ref: mirror_matrix_qcol_zrow
-          shift: [0.5px, -0.5px + wcol_stagger]
+          shift: [(hkx+pp), -(hkx+pp) + wcol_stagger]
         - ref: mirror_matrix_qcol_zrow
-          shift: [ 3ks+3kp - 0.5px , -0.5px + wcol_stagger]
+          shift: [3ks+3kp - (hkx+pp), -(hkx+pp) + wcol_stagger]
         # - ref: mirror_matrix_wcol_zrow
-        #   shift: [0.5px, -0.5px]
+        #   shift: [(hkx+pp), -(hkx+pp)]
         # - ref: mirror_matrix_wcol_zrow
-        #   shift: [0.5px, -0.5px + ecol_stagger]
+        #   shift: [(hkx+pp), -(hkx+pp) + ecol_stagger]
         # - ref: mirror_matrix_rcol_zrow
-        #   shift: [-0.5px, -0.5px - rcol_stagger]
+        #   shift: [-(hkx+pp), -(hkx+pp) - rcol_stagger]
         # - ref: mirror_thumb_inner
-        #   shift: [-0.5px, 0.5px -( wcol_stagger + ecol_stagger + rcol_stagger)]
+        #   shift: [-(hkx+pp), (hkx+pp) -( wcol_stagger + ecol_stagger + rcol_stagger)]
         - ref: mirror_thumb_inner
-          shift: [-0.5px, -0.5px]
+          shift: [-(hkx+pp), -(hkx+pp)]
         - ref: mirror_thumb_outer
-          shift: [-0.5px, -0.5px]
+          shift: [-(hkx+pp), -(hkx+pp)]
         - ref: mirror_thumb_outer
-          shift: [0.5px, -0.5px]
+          shift: [(hkx+pp), -(hkx+pp)]
         - ref: mirror_thumb_outer
-          shift: [0.5px, 0.5px]
+          shift: [(hkx+pp), (hkx+pp)]
         - ref: thumb_outer
-          shift: [0.5px, 0.5px]
+          shift: [(hkx+pp), (hkx+pp)]
         - ref: thumb_outer
-          shift: [0.5px, -0.5px]
+          shift: [(hkx+pp), -(hkx+pp)]
         - ref: thumb_outer
-          shift: [-0.5px, -0.5px]
+          shift: [-(hkx+pp), -(hkx+pp)]
         - ref: thumb_inner
-          shift: [-0.5px, -0.5px]
+          shift: [-(hkx+pp), -(hkx+pp)]
         - ref: matrix_qcol_zrow
-          shift: [ 3ks+3kp - 0.5px , -0.5px + wcol_stagger]
+          shift: [3ks+3kp - (hkx+pp), -(hkx+pp) + wcol_stagger]
         - ref: matrix_qcol_zrow
-          shift: [0.5px, -0.5px + wcol_stagger]
-        - ref: matrix_qcol_zrow 
-          shift: [0.5px, -0.5px]
+          shift: [(hkx+pp), -(hkx+pp) + wcol_stagger]
         - ref: matrix_qcol_zrow
-          shift: [-0.5px, -0.5px]
-
-  aaaa:
-    - what: polygon
-      operation: stack
-      fillet: 2
-      points:
-        - ref: matrix_wcol_zrow
-          shift: [0, -0.5px]
-        - ref: matrix_wcol_zrow
-          shift: [0, -5px]
-        - ref: matrix_ecol_zrow
-          shift: [0, -5px]
-        - ref: matrix_ecol_zrow
-          shift: [0, -0.5px]
+          shift: [(hkx+pp), -(hkx+pp)]
+        - ref: matrix_qcol_zrow
+          shift: [-(hkx+pp), -(hkx+pp)]
 
   combo:
     - operation: stack
@@ -269,8 +309,12 @@ outlines:
       name: controller
     - operation: subtract
       name: battery
+    # - operation: subtract
+    #   name: battery_connector
     - operation: subtract
-      name: battery_connector
+      name: power
+    - operation: subtract
+      name: reset
 
 pcbs:
   main_pcb:
@@ -307,3 +351,28 @@ pcbs:
         where: controller_center
         params:
           orientation: up
+        adjust.rotate: -90
+      power_switch:
+        what: power_switch_smd_side
+        where: power_center
+        adjust.rotate: 180
+      reset:
+        what: reset
+        params:
+          from: GND
+          to: RST
+        where: reset_center
+      battery_plus:
+        what: pad
+        params:
+          width: 2
+          text: "+"
+          net: GND
+        where: battery_connector_plus
+      battery_minus:
+        what: pad
+        params:
+          width: 2
+          text: "-"
+          net: GN
+        where: battery_connector_minus

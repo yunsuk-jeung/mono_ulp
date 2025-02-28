@@ -139,16 +139,16 @@ points:
         - helper
       anchor:
         ref: controller_center
-        shift: [5, -25-10]
+        shift: [15, -25-10]
 
-    battery_connector_plus:
+    battery_connector_plus_loc:
       key.tags:
         - helper
       anchor:
         ref: battery_connector_center
         shift: [5, 0]
 
-    battery_connector_minus:
+    battery_connector_minus_loc:
       key.tags:
         - helper
       anchor:
@@ -362,17 +362,9 @@ pcbs:
           from: GND
           to: RST
         where: reset_center
-      battery_plus:
-        what: pad
+      reset2:
+        what: battery_pad
         params:
-          width: 2
-          text: "+"
-          net: GND
-        where: battery_connector_plus
-      battery_minus:
-        what: pad
-        params:
-          width: 2
-          text: "-"
-          net: GN
-        where: battery_connector_minus
+          plus: VCC
+          minus: GND
+        where: battery_connector_center

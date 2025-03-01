@@ -9,7 +9,8 @@ units:
   kp: 1
   kx: ks+kp
   hkx: 0.5kx
-  pp: 3 #pcb padding
+  pp: 4.4 #pcb padding
+  pf: 1
   # px: 0
   qcol_stagger: 0kx
   wcol_stagger: 0.625 kx
@@ -19,10 +20,15 @@ units:
   thumb_splay: 0
   mirror_splay: -15
   # mirror_splay: 0
-  mirror_dist: 50
+  mirror_dist: 60
 
   # case
   case_edge_size: 0
+
+  # screw
+  sr: 1.1 # M2 screws radius
+  sd: sr * 2
+  sp: sr * 2 #screw padding
 
   # components
   components_padding: 4
@@ -78,6 +84,31 @@ points:
         outer.key:
           shift: [0, tcol_stagger+tcol_stagger]
 
+    helper_qcol_zrow_right_bottom:
+      key.tags:
+        - helper
+      anchor:
+        ref: matrix_qcol_zrow
+        shift: [kx, -50]
+
+    helper_thumb_inner_left_bottom:
+      key.tags:
+        - helper
+      anchor:
+        ref: thumb_inner
+        shift: [-hkx-pp, -hkx-pp]
+        rotate: 90
+
+    helper_qcol_zrow_thumb_inter:
+      key.tags:
+        - helper
+      anchor:
+        - aggregate:
+            method: intersect
+            parts:
+              - ref: helper_qcol_zrow_right_bottom
+              - ref: helper_thumb_inner_left_bottom
+
     helper_tcol_qrow_unrotated:
       key.tags:
         - helper
@@ -123,7 +154,7 @@ points:
         - helper
       anchor:
         ref: controller_top
-        shift: [0, -0.5 nicenano_height -0.5]
+        shift: [0, -0.5 nicenano_height -0.5 + tcol_stagger]
 
     battery_center:
       key.tags:
@@ -163,14 +194,62 @@ points:
         - helper
       anchor:
         ref: power_center_bottom
-        shift: [0, 0.5 power_height + 0.5]
+        shift: [0, 0.5 power_height + 0.5 +tcol_stagger]
 
     reset_center:
       key.tags:
         - helper
       anchor:
         ref: thumb_outer
-        shift: [0, hkx + 1 + reset_height]
+        shift: [2, hkx + pp + reset_height]
+
+    sc_tl:
+      key.tags:
+        - screw
+      anchor:
+        - ref: matrix_qcol_qrow
+          shift: [-hkx-sp+0.8, hkx+sp-0.8]
+
+    sc_tm:
+      key.tags:
+        - screw
+      anchor:
+        - ref: matrix_ecol_qrow
+          shift: [0, hkx+sp]
+    sc_rm:
+      key.tags:
+        - screw
+      anchor:
+        - ref: matrix_tcol_qrow
+          shift: [hkx+2sp, hkx-sp]
+    sc_rb:
+      key.tags:
+        - screw
+      anchor:
+        - ref: thumb_outer
+          shift: [hkx+sp-0.4, -hkx-sp+0.4]
+    sc_rb2:
+      key.tags:
+        - screw
+      anchor:
+        - ref: thumb_inner
+          shift: [-hkx-sp+0.4, -hkx-sp+0.4]
+    sc_lb:
+      key.tags:
+        - screw
+      anchor:
+        - ref: matrix_qcol_zrow
+          shift: [-hkx-sp+0.8, -hkx-sp+0.4]
+    sc_lb2:
+      key.tags:
+        - screw
+      anchor:
+        - ref: matrix_qcol_zrow
+          shift:
+            [
+              hkx+pp - sp-0.4,
+              -hkx-pp +wcol_stagger+ecol_stagger+rcol_stagger - kx-tcol_stagger-tcol_stagger +1.75 + sp,
+            ]
 
   rotate: mirror_splay
   mirror:
@@ -215,7 +294,7 @@ outlines:
   plate:
     - what: polygon
       operation: stack
-      fillet: 2
+      fillet: pf
       points:
         - ref: matrix_qcol_qrow
           shift: [-hkx-pp, hkx+pp]
@@ -227,6 +306,8 @@ outlines:
           shift: [hkx-pp, hkx+pp]
         - ref: matrix_ecol_qrow
           shift: [-hkx-pp, hkx+pp]
+        # - ref: matrix_ecol_qrow
+        #   shift: [0, hkx+pp]
         - ref: matrix_ecol_qrow
           shift: [hkx+pp, hkx+pp]
         - ref: matrix_rcol_qrow
@@ -238,9 +319,14 @@ outlines:
         - ref: matrix_tcol_qrow
           shift: [hkx+pp, hkx+pp]
 
+        - ref: matrix_tcol_qrow
+          shift: [hkx+pp, hkx+pp + tcol_stagger]
+
         # - ref: controller_center
         #   shift: [0, 0]
 
+        - ref: mirror_matrix_tcol_qrow
+          shift: [hkx+pp, hkx+pp + tcol_stagger]
         - ref: mirror_matrix_tcol_qrow
           shift: [hkx+pp, hkx+pp]
         - ref: mirror_matrix_tcol_qrow
@@ -265,19 +351,18 @@ outlines:
         - ref: mirror_matrix_qcol_zrow
           shift: [-(hkx+pp), -(hkx+pp)]
         - ref: mirror_matrix_qcol_zrow
-          shift: [(hkx+pp), -(hkx+pp)]
+          shift:
+            [
+              hkx+pp,
+              -hkx-pp +wcol_stagger+ecol_stagger+rcol_stagger - kx-tcol_stagger-tcol_stagger,
+            ]
+        # - ref: mirror_matrix_qcol_zrow
+        #   shift: [(hkx+pp), -(hkx+pp)]
         - ref: mirror_matrix_qcol_zrow
           shift: [(hkx+pp), -(hkx+pp) + wcol_stagger]
         - ref: mirror_matrix_qcol_zrow
           shift: [3ks+3kp - (hkx+pp), -(hkx+pp) + wcol_stagger]
-        # - ref: mirror_matrix_wcol_zrow
-        #   shift: [(hkx+pp), -(hkx+pp)]
-        # - ref: mirror_matrix_wcol_zrow
-        #   shift: [(hkx+pp), -(hkx+pp) + ecol_stagger]
-        # - ref: mirror_matrix_rcol_zrow
-        #   shift: [-(hkx+pp), -(hkx+pp) - rcol_stagger]
-        # - ref: mirror_thumb_inner
-        #   shift: [-(hkx+pp), (hkx+pp) -( wcol_stagger + ecol_stagger + rcol_stagger)]
+
         - ref: mirror_thumb_inner
           shift: [-(hkx+pp), -(hkx+pp)]
         - ref: mirror_thumb_outer
@@ -285,9 +370,9 @@ outlines:
         - ref: mirror_thumb_outer
           shift: [(hkx+pp), -(hkx+pp)]
         - ref: mirror_thumb_outer
-          shift: [(hkx+pp), (hkx+pp)]
+          shift: [(hkx+pp), (hkx+pp) +tcol_stagger]
         - ref: thumb_outer
-          shift: [(hkx+pp), (hkx+pp)]
+          shift: [(hkx+pp), (hkx+pp) + tcol_stagger]
         - ref: thumb_outer
           shift: [(hkx+pp), -(hkx+pp)]
         - ref: thumb_outer
@@ -298,10 +383,21 @@ outlines:
           shift: [3ks+3kp - (hkx+pp), -(hkx+pp) + wcol_stagger]
         - ref: matrix_qcol_zrow
           shift: [(hkx+pp), -(hkx+pp) + wcol_stagger]
+        # - ref: helper_qcol_zrow_thumb_inter
+        # shift: [0, 0]
         - ref: matrix_qcol_zrow
-          shift: [(hkx+pp), -(hkx+pp)]
+          shift:
+            [
+              hkx+pp,
+              -hkx-pp +wcol_stagger+ecol_stagger+rcol_stagger - kx-tcol_stagger-tcol_stagger,
+            ]
         - ref: matrix_qcol_zrow
           shift: [-(hkx+pp), -(hkx+pp)]
+
+  screws:
+    - what: circle
+      where: screw
+      radius: sr
 
   combo:
     - operation: stack
@@ -318,12 +414,19 @@ outlines:
       name: power
     - operation: subtract
       name: reset
+    - operation: subtract
+      name: screws
+  pcb_outline:
+    - operation: stack
+      name: plate
+    - operation: subtract
+      name: screws
 
 pcbs:
   main_pcb:
     outlines:
       main:
-        outline: plate
+        outline: pcb_outline
     footprints:
       switch:
         what: pg1316s

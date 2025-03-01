@@ -10,7 +10,7 @@ units:
   kx: ks+kp
   hkx: 0.5kx
   pp: 4.4 #pcb padding
-  pf: 1
+  pf: 4
   # px: 0
   qcol_stagger: 0kx
   wcol_stagger: 0.625 kx
@@ -154,7 +154,7 @@ points:
         - helper
       anchor:
         ref: controller_top
-        shift: [0, -0.5 nicenano_height -0.5 + tcol_stagger]
+        shift: [0, -0.5 nicenano_height -0.5 + tcol_stagger-3]
 
     battery_center:
       key.tags:
@@ -208,7 +208,7 @@ points:
         - screw
       anchor:
         - ref: matrix_qcol_qrow
-          shift: [-hkx-sp+0.8, hkx+sp-0.8]
+          shift: [0, hkx+sp+2]
 
     sc_tm:
       key.tags:
@@ -227,19 +227,19 @@ points:
         - screw
       anchor:
         - ref: thumb_outer
-          shift: [hkx+sp-0.4, -hkx-sp+0.4]
+          shift: [hkx+sp-0.6, -hkx-sp+0.6]
     sc_rb2:
       key.tags:
         - screw
       anchor:
         - ref: thumb_inner
-          shift: [-hkx-sp+0.4, -hkx-sp+0.4]
+          shift: [-hkx-sp+0.6, -hkx-sp+0.6]
     sc_lb:
       key.tags:
         - screw
       anchor:
         - ref: matrix_qcol_zrow
-          shift: [-hkx-sp+0.8, -hkx-sp+0.4]
+          shift: [-hkx-sp+1.2, -hkx-sp+0.4]
     sc_lb2:
       key.tags:
         - screw
@@ -247,7 +247,7 @@ points:
         - ref: matrix_qcol_zrow
           shift:
             [
-              hkx+pp - sp-0.4,
+              hkx+pp - sp-1.2,
               -hkx-pp +wcol_stagger+ecol_stagger+rcol_stagger - kx-tcol_stagger-tcol_stagger +1.75 + sp,
             ]
 
@@ -298,12 +298,14 @@ outlines:
       points:
         - ref: matrix_qcol_qrow
           shift: [-hkx-pp, hkx+pp]
-        - ref: matrix_qcol_qrow
-          shift: [hkx-pp, hkx+pp]
+        # - ref: matrix_qcol_qrow
+        #   shift: [hkx-pp, hkx+pp]
+        # - ref: matrix_qcol_qrow
+        #   shift: [0, hkx+pp]
         - ref: matrix_wcol_qrow
           shift: [-hkx-pp, hkx+pp]
         - ref: matrix_wcol_qrow
-          shift: [hkx-pp, hkx+pp]
+          shift: [0, hkx+pp]
         - ref: matrix_ecol_qrow
           shift: [-hkx-pp, hkx+pp]
         # - ref: matrix_ecol_qrow
@@ -311,40 +313,39 @@ outlines:
         - ref: matrix_ecol_qrow
           shift: [hkx+pp, hkx+pp]
         - ref: matrix_rcol_qrow
-          shift: [-hkx+pp, hkx+pp]
+          shift: [0, hkx+pp]
         - ref: matrix_rcol_qrow
           shift: [hkx+pp, hkx+pp]
         - ref: matrix_tcol_qrow
-          shift: [-hkx+pp, hkx+pp]
+          shift: [0, hkx+pp]
         - ref: matrix_tcol_qrow
           shift: [hkx+pp, hkx+pp]
-
         - ref: matrix_tcol_qrow
-          shift: [hkx+pp, hkx+pp + tcol_stagger]
+          shift: [hkx+pp+pf+1, hkx+pp + tcol_stagger]
 
         # - ref: controller_center
         #   shift: [0, 0]
 
         - ref: mirror_matrix_tcol_qrow
-          shift: [hkx+pp, hkx+pp + tcol_stagger]
+          shift: [hkx+pp+pf+1, hkx+pp + tcol_stagger]
         - ref: mirror_matrix_tcol_qrow
           shift: [hkx+pp, hkx+pp]
         - ref: mirror_matrix_tcol_qrow
-          shift: [-hkx+pp, hkx+pp]
+          shift: [0, hkx+pp]
         - ref: mirror_matrix_rcol_qrow
           shift: [hkx+pp, hkx+pp]
         - ref: mirror_matrix_rcol_qrow
-          shift: [-hkx+pp, hkx+pp]
+          shift: [0, hkx+pp]
         - ref: mirror_matrix_ecol_qrow
           shift: [hkx+pp, hkx+pp]
         - ref: mirror_matrix_ecol_qrow
           shift: [-hkx-pp, hkx+pp]
         - ref: mirror_matrix_wcol_qrow
-          shift: [hkx-pp, hkx+pp]
+          shift: [0, hkx+pp]
         - ref: mirror_matrix_wcol_qrow
           shift: [-hkx-pp, hkx+pp]
-        - ref: mirror_matrix_qcol_qrow
-          shift: [hkx-pp, hkx+pp]
+        # - ref: mirror_matrix_qcol_qrow
+        #   shift: [hkx-pp, hkx+pp]
         - ref: mirror_matrix_qcol_qrow
           shift: [-hkx-pp, hkx+pp]
 

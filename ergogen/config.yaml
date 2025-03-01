@@ -9,13 +9,13 @@ units:
   kp: 1
   kx: ks+kp
   hkx: 0.5kx
-  pp: 2 #pcb padding
+  pp: 3 #pcb padding
   # px: 0
-  qcol_stagger: 0U
-  wcol_stagger: 0.66U
-  ecol_stagger: 0.25U
-  rcol_stagger: -0.25U
-  tcol_stagger: -0.15U
+  qcol_stagger: 0kx
+  wcol_stagger: 0.625 kx
+  ecol_stagger: 0.125U
+  rcol_stagger: -0.375U
+  tcol_stagger: -0.125U
   thumb_splay: 0
   mirror_splay: -15
   # mirror_splay: 0
@@ -32,11 +32,10 @@ units:
   battery_height: 30
   niceview_width: 14
   niceview_height: 30
-  battery_connector_width: 0.4U # !
-  battery_connector_height: 0.8U # !
-  power_width: 2.7
-  power_height: 7.8
-  power_button_size: 1.5
+  battery_connector_width: 8.5 # !
+  battery_connector_height: 3 # !
+  power_width: 8.5
+  power_height: 3
   reset_width: 8
   reset_height: 3.5
 
@@ -84,7 +83,6 @@ points:
         - helper
       anchor:
         ref: matrix_tcol_qrow
-        # shift: [0.5(ks+kp), 0.5(ks+kp)]
         rotate: -mirror_splay
 
     helper_tcol_qrow_directing_right:
@@ -95,12 +93,13 @@ points:
         shift: [(hkx+pp), (hkx+pp)]
         rotate: -90-mirror_splay
 
-    center:
+    center_line:
       key.tags:
         - helper
       anchor:
         ref: helper_tcol_qrow_unrotated
-        shift: [0.5 mirror_dist, -50]
+        shift: [0.5 mirror_dist, 50]
+        rotate: 180
 
     controller_top_rotated:
       key.tags:
@@ -110,7 +109,7 @@ points:
             method: intersect
             parts:
               - ref: helper_tcol_qrow_directing_right
-              - ref: center
+              - ref: center_line
 
     controller_top:
       key.tags:
@@ -124,7 +123,7 @@ points:
         - helper
       anchor:
         ref: controller_top
-        shift: [0, -17]
+        shift: [0, -0.5 nicenano_height -0.5]
 
     battery_center:
       key.tags:
@@ -134,41 +133,44 @@ points:
         shift: [0, -25]
         rotate: 90
 
-    battery_connector_center:
+    helper_thumb_outer_directing_right:
       key.tags:
         - helper
       anchor:
-        ref: controller_center
-        shift: [15, -25-10]
+        ref: thumb_outer
+        shift: [(hkx+pp), (hkx+pp)]
+        rotate: -90-mirror_splay
 
-    battery_connector_plus_loc:
+    power_rotated:
       key.tags:
         - helper
       anchor:
-        ref: battery_connector_center
-        shift: [5, 0]
+        - aggregate:
+            method: intersect
+            parts:
+              - ref: helper_thumb_outer_directing_right
+              - ref: center_line
 
-    battery_connector_minus_loc:
+    power_center_bottom:
       key.tags:
         - helper
       anchor:
-        ref: battery_connector_center
-        shift: [10, 0]
-
-    reset_center:
-      key.tags:
-        - helper
-      anchor:
-        ref: controller_center
-        shift: [-15, -25-10]
+        ref: power_rotated
+        rotate: -mirror_splay
 
     power_center:
       key.tags:
         - helper
       anchor:
-        ref: controller_center
-        shift: [0, -25-10]
-        rotate: 90
+        ref: power_center_bottom
+        shift: [0, 0.5 power_height + 0.5]
+
+    reset_center:
+      key.tags:
+        - helper
+      anchor:
+        ref: thumb_outer
+        shift: [0, hkx + 1 + reset_height]
 
   rotate: mirror_splay
   mirror:
@@ -196,7 +198,7 @@ outlines:
 
   battery_connector:
     - what: rectangle
-      where: battery_connector_center
+      where: mirror_reset_center
       size: [battery_connector_width, battery_connector_height]
       # adjust.rotate: battery_connector_rotation
 
@@ -204,6 +206,7 @@ outlines:
     - what: rectangle
       where: power_center
       size: [power_width, power_height]
+
   reset:
     - what: rectangle
       where: reset_center
@@ -212,7 +215,7 @@ outlines:
   plate:
     - what: polygon
       operation: stack
-      fillet: 1
+      fillet: 2
       points:
         - ref: matrix_qcol_qrow
           shift: [-hkx-pp, hkx+pp]
@@ -309,8 +312,8 @@ outlines:
       name: controller
     - operation: subtract
       name: battery
-    # - operation: subtract
-    #   name: battery_connector
+    - operation: subtract
+      name: battery_connector
     - operation: subtract
       name: power
     - operation: subtract
@@ -351,20 +354,26 @@ pcbs:
         where: controller_center
         params:
           orientation: up
-        adjust.rotate: -90
+        adjust:
+          rotate: -90
+          shift: [0, -1.28]
       power_switch:
         what: power_switch_smd_side
         where: power_center
-        adjust.rotate: 180
+        adjust.rotate: -90
       reset:
         what: reset
         params:
           from: GND
           to: RST
         where: reset_center
-      reset2:
+      battery_pad:
         what: battery_pad
         params:
-          plus: VCC
+          plus: RAW
           minus: GND
-        where: battery_connector_center
+        where: mirror_reset_center
+      battery_outline:
+        what: battery_outline
+        where: battery_center
+        adjust.rotate: -90

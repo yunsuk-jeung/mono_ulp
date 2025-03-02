@@ -9,8 +9,8 @@ units:
   kp: 1
   kx: ks+kp
   hkx: 0.5kx
-  pp: 4.4 #pcb padding
-  pf: 4
+  pp: 4.9 #pcb padding
+  pf: 3
   # px: 0
   qcol_stagger: 0kx
   wcol_stagger: 0.625 kx
@@ -19,8 +19,9 @@ units:
   tcol_stagger: -0.125U
   thumb_splay: 0
   mirror_splay: -15
-  # mirror_splay: 0
   mirror_dist: 60
+  # mirror_splay: 0
+  # mirror_dist: 80
 
   # case
   case_edge_size: 0
@@ -156,20 +157,12 @@ points:
         ref: controller_top
         shift: [0, -0.5 nicenano_height -0.5 + tcol_stagger-3]
 
-    battery_center:
-      key.tags:
-        - helper
-      anchor:
-        ref: controller_center
-        shift: [0, -25]
-        rotate: 90
-
     helper_thumb_outer_directing_right:
       key.tags:
         - helper
       anchor:
         ref: thumb_outer
-        shift: [(hkx+pp), (hkx+pp)]
+        shift: [hkx+pp, hkx]
         rotate: -90-mirror_splay
 
     power_rotated:
@@ -194,7 +187,15 @@ points:
         - helper
       anchor:
         ref: power_center_bottom
-        shift: [0, 0.5 power_height + 0.5 +tcol_stagger]
+        shift: [0, 0.5 power_height + 0.5]
+
+    battery_center:
+      key.tags:
+        - helper
+      anchor:
+        ref: power_center
+        shift: [0, 8.5]
+        rotate: 90
 
     reset_center:
       key.tags:
@@ -208,14 +209,14 @@ points:
         - screw
       anchor:
         - ref: matrix_qcol_qrow
-          shift: [0, hkx+sp+2]
+          shift: [0, hkx+pp]
 
     sc_tm:
       key.tags:
         - screw
       anchor:
         - ref: matrix_ecol_qrow
-          shift: [0, hkx+sp]
+          shift: [0, hkx+pp-sp]
     sc_rm:
       key.tags:
         - screw
@@ -227,28 +228,40 @@ points:
         - screw
       anchor:
         - ref: thumb_outer
-          shift: [hkx+sp-0.6, -hkx-sp+0.6]
+          shift: [hkx+pp-1.2sp, -hkx-pp+1.2sp]
     sc_rb2:
       key.tags:
         - screw
       anchor:
         - ref: thumb_inner
-          shift: [-hkx-sp+0.6, -hkx-sp+0.6]
+          shift: [-hkx-pp+1.2sp, -hkx-pp+1.2sp]
     sc_lb:
       key.tags:
         - screw
       anchor:
         - ref: matrix_qcol_zrow
-          shift: [-hkx-sp+1.2, -hkx-sp+0.4]
-    sc_lb2:
+          shift: [-hkx-pp+0.9pf, -hkx-pp+0.9pf]
+
+    # sc_lb2:
+    #   key.tags:
+    #     - screw
+    #   anchor:
+    #     - ref: matrix_qcol_zrow
+    #       shift:
+    #         [
+    #           hkx+pp - sp-1.2,
+    #           -hkx-pp +wcol_stagger+ecol_stagger+rcol_stagger - kx-tcol_stagger-tcol_stagger +1.75 + sp,
+    #         ]
+
+    sc_lb3:
       key.tags:
         - screw
       anchor:
         - ref: matrix_qcol_zrow
           shift:
             [
-              hkx+pp - sp-1.2,
-              -hkx-pp +wcol_stagger+ecol_stagger+rcol_stagger - kx-tcol_stagger-tcol_stagger +1.75 + sp,
+              hkx+pp-pf,
+              -hkx-pp +wcol_stagger+ecol_stagger+rcol_stagger - kx-tcol_stagger-tcol_stagger + 1.35pf,
             ]
 
   rotate: mirror_splay
@@ -261,7 +274,7 @@ outlines:
     - what: rectangle
       where: keys
       size: ks
-      asym: both
+      fillet: 1.2
 
   controller:
     - what: rectangle
@@ -371,9 +384,9 @@ outlines:
         - ref: mirror_thumb_outer
           shift: [(hkx+pp), -(hkx+pp)]
         - ref: mirror_thumb_outer
-          shift: [(hkx+pp), (hkx+pp) +tcol_stagger]
+          shift: [(hkx+pp), hkx]
         - ref: thumb_outer
-          shift: [(hkx+pp), (hkx+pp) + tcol_stagger]
+          shift: [(hkx+pp), hkx]
         - ref: thumb_outer
           shift: [(hkx+pp), -(hkx+pp)]
         - ref: thumb_outer
@@ -417,11 +430,48 @@ outlines:
       name: reset
     - operation: subtract
       name: screws
+
   pcb_outline:
     - operation: stack
       name: plate
     - operation: subtract
       name: screws
+
+  keycap_exp:
+    - what: rectangle
+      where: keys
+      size: ks + 2
+      # fillet: 1.2
+
+  case_screws:
+    - what: circle
+      where: screw
+      radius: 0.8
+
+  case_outline:
+    - what: outline
+      name: plate
+      # expand: 2
+
+  case_ref:
+    - operation: stack
+      name: case_outline
+    - operation: subtract
+      name: keycap_exp
+    - operation: subtract
+      name: case_screws
+    - operation: add
+      name: keycaps
+    - operation: subtract
+      name: controller
+    - operation: subtract
+      name: battery
+    - operation: subtract
+      name: battery_connector
+    - operation: subtract
+      name: power
+    - operation: subtract
+      name: reset
 
 pcbs:
   main_pcb:
@@ -481,3 +531,7 @@ pcbs:
         what: battery_outline
         where: battery_center
         adjust.rotate: -90
+  case_pcb:
+    outlines:
+      main:
+        outline: case_ref

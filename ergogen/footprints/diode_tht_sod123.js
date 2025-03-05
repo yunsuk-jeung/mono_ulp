@@ -48,18 +48,18 @@
 
 module.exports = {
   params: {
-    designator: 'D',
-    side: 'B',
+    designator: "D",
+    side: "B",
     reversible: false,
     include_tht: false,
-    diode_3dmodel_filename: '',
+    diode_3dmodel_filename: "",
     diode_3dmodel_xyz_offset: [0, 0, 0],
     diode_3dmodel_xyz_rotation: [0, 0, 0],
     diode_3dmodel_xyz_scale: [1, 1, 1],
-    from: { type: 'net', value: undefined },
-    to: { type: 'net', value: undefined }
+    from: { type: "net", value: undefined },
+    to: { type: "net", value: undefined },
   },
-  body: p => {
+  body: (p) => {
     const standard_opening = `
     (footprint "ceoloide:diode_tht_sod123"
         (layer "${p.side}.Cu")
@@ -70,7 +70,7 @@ module.exports = {
             ${p.ref_hide}
             (effects (font (size 1 1) (thickness 0.15)))
         )
-        `
+        `;
     const front = `
         (fp_line (start 0.25 0) (end 0.75 0) (layer "F.SilkS") (stroke (width 0.1) (type solid)))
         (fp_line (start 0.25 0.4) (end -0.35 0) (layer "F.SilkS") (stroke (width 0.1) (type solid)))
@@ -81,7 +81,7 @@ module.exports = {
         (fp_line (start -0.75 0) (end -0.35 0) (layer "F.SilkS") (stroke (width 0.1) (type solid)))
         (pad "1" smd rect (at -1.65 0 ${p.r}) (size 0.9 1.2) (layers "F.Cu" "F.Paste" "F.Mask") ${p.to.str})
         (pad "2" smd rect (at 1.65 0 ${p.r}) (size 0.9 1.2) (layers "F.Cu" "F.Paste" "F.Mask") ${p.from.str})
-        `
+        `;
     const back = `
         (fp_line (start 0.25 0) (end 0.75 0) (layer "B.SilkS") (stroke (width 0.1) (type solid)))
         (fp_line (start 0.25 0.4) (end -0.35 0) (layer "B.SilkS") (stroke (width 0.1) (type solid)))
@@ -92,22 +92,22 @@ module.exports = {
         (fp_line (start -0.75 0) (end -0.35 0) (layer "B.SilkS") (stroke (width 0.1) (type solid)))
         (pad "2" smd rect (at 1.65 0 ${p.r}) (size 0.9 1.2) (layers "B.Cu" "B.Paste" "B.Mask") ${p.from.str})
         (pad "1" smd rect (at -1.65 0 ${p.r}) (size 0.9 1.2) (layers "B.Cu" "B.Paste" "B.Mask") ${p.to.str})
-        `
+        `;
 
     const tht = `
         (pad "1" thru_hole rect (at -3.81 0 ${p.r}) (size 1.778 1.778) (drill 0.9906) (layers "*.Cu" "*.Mask") ${p.to.str})
         (pad "2" thru_hole circle (at 3.81 0 ${p.r}) (size 1.905 1.905) (drill 0.9906) (layers "*.Cu" "*.Mask") ${p.from.str})
-        `
+        `;
 
     const diode_3dmodel = `
         (model ${p.diode_3dmodel_filename}
             (offset (xyz ${p.diode_3dmodel_xyz_offset[0]} ${p.diode_3dmodel_xyz_offset[1]} ${p.diode_3dmodel_xyz_offset[2]}))
             (scale (xyz ${p.diode_3dmodel_xyz_scale[0]} ${p.diode_3dmodel_xyz_scale[1]} ${p.diode_3dmodel_xyz_scale[2]}))
             (rotate (xyz ${p.diode_3dmodel_xyz_rotation[0]} ${p.diode_3dmodel_xyz_rotation[1]} ${p.diode_3dmodel_xyz_rotation[2]})))
-        `
+        `;
     const standard_closing = `
         )
-        `
+        `;
 
     let final = standard_opening;
 
@@ -122,11 +122,11 @@ module.exports = {
     }
 
     if (p.diode_3dmodel_filename) {
-      final += diode_3dmodel
+      final += diode_3dmodel;
     }
 
     final += standard_closing;
 
     return final;
-  }
-}
+  },
+};

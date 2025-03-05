@@ -1,0 +1,537 @@
+meta:
+  engine: 4.1.0
+  version: 0.0.1
+  author: n1tsu
+
+units:
+  # keys
+  ks: 16
+  kp: 1
+  kx: ks+kp
+  hkx: 0.5kx
+  pp: 4.9 #pcb padding
+  pf: 3
+  # px: 0
+  qcol_stagger: 0kx
+  wcol_stagger: 0.625 kx
+  ecol_stagger: 0.125U
+  rcol_stagger: -0.375U
+  tcol_stagger: -0.125U
+  thumb_splay: 0
+  mirror_splay: -15
+  mirror_dist: 60
+  # mirror_splay: 0
+  # mirror_dist: 80
+
+  # case
+  case_edge_size: 0
+
+  # screw
+  sr: 1.1 # M2 screws radius
+  sd: sr * 2
+  sp: sr * 2 #screw padding
+
+  # components
+  components_padding: 4
+  nicenano_width: 17.78
+  nicenano_height: 33
+  battery_width: 12
+  battery_height: 30
+  niceview_width: 14
+  niceview_height: 30
+  battery_connector_width: 8.5 # !
+  battery_connector_height: 3 # !
+  power_width: 8.5
+  power_height: 3
+  reset_width: 8
+  reset_height: 3.5
+
+points:
+  zones:
+    matrix:
+      key:
+        spread: ks + kp
+        tags: "keys"
+      anchor.shift: [100, -100]
+      columns:
+        qcol:
+          key:
+            stagger: qcol_stagger
+            column_net: D05
+        wcol.key.stagger: wcol_stagger
+        ecol.key.stagger: ecol_stagger
+        rcol.key.stagger: rcol_stagger
+        tcol.key.stagger: tcol_stagger
+      rows:
+        zrow.padding: ks + kp
+        arow.padding: ks + kp
+        qrow:
+          padding: ks + kp
+          row_net: D01
+          mirror.row_net: D04
+
+    thumb:
+      key:
+        tags: "keys"
+        spread: ks+kp
+        padding: ks+kp
+      anchor:
+        ref: matrix_rcol_zrow
+        shift: [0, -ks-kp]
+      columns:
+        inner:
+        middle.key:
+          shift: [0, tcol_stagger]
+        outer.key:
+          shift: [0, tcol_stagger+tcol_stagger]
+
+    helper_qcol_zrow_right_bottom:
+      key.tags:
+        - helper
+      anchor:
+        ref: matrix_qcol_zrow
+        shift: [kx, -50]
+
+    helper_thumb_inner_left_bottom:
+      key.tags:
+        - helper
+      anchor:
+        ref: thumb_inner
+        shift: [-hkx-pp, -hkx-pp]
+        rotate: 90
+
+    helper_qcol_zrow_thumb_inter:
+      key.tags:
+        - helper
+      anchor:
+        - aggregate:
+            method: intersect
+            parts:
+              - ref: helper_qcol_zrow_right_bottom
+              - ref: helper_thumb_inner_left_bottom
+
+    helper_tcol_qrow_unrotated:
+      key.tags:
+        - helper
+      anchor:
+        ref: matrix_tcol_qrow
+        rotate: -mirror_splay
+
+    helper_tcol_qrow_directing_right:
+      key.tags:
+        - helper
+      anchor:
+        ref: matrix_tcol_qrow
+        shift: [(hkx+pp), (hkx+pp)]
+        rotate: -90-mirror_splay
+
+    center_line:
+      key.tags:
+        - helper
+      anchor:
+        ref: helper_tcol_qrow_unrotated
+        shift: [0.5 mirror_dist, 50]
+        rotate: 180
+
+    controller_top_rotated:
+      key.tags:
+        - helper
+      anchor:
+        - aggregate:
+            method: intersect
+            parts:
+              - ref: helper_tcol_qrow_directing_right
+              - ref: center_line
+
+    controller_top:
+      key.tags:
+        - helper
+      anchor:
+        ref: controller_top_rotated
+        rotate: -mirror_splay
+
+    controller_center:
+      key.tags:
+        - helper
+      anchor:
+        ref: controller_top
+        shift: [0, -0.5 nicenano_height -0.5 + tcol_stagger-3]
+
+    helper_thumb_outer_directing_right:
+      key.tags:
+        - helper
+      anchor:
+        ref: thumb_outer
+        shift: [hkx+pp, hkx]
+        rotate: -90-mirror_splay
+
+    power_rotated:
+      key.tags:
+        - helper
+      anchor:
+        - aggregate:
+            method: intersect
+            parts:
+              - ref: helper_thumb_outer_directing_right
+              - ref: center_line
+
+    power_center_bottom:
+      key.tags:
+        - helper
+      anchor:
+        ref: power_rotated
+        rotate: -mirror_splay
+
+    power_center:
+      key.tags:
+        - helper
+      anchor:
+        ref: power_center_bottom
+        shift: [0, 0.5 power_height + 0.5]
+
+    battery_center:
+      key.tags:
+        - helper
+      anchor:
+        ref: power_center
+        shift: [0, 8.5]
+        rotate: 90
+
+    reset_center:
+      key.tags:
+        - helper
+      anchor:
+        ref: thumb_outer
+        shift: [2, hkx + pp + reset_height]
+
+    sc_tl:
+      key.tags:
+        - screw
+      anchor:
+        - ref: matrix_qcol_qrow
+          shift: [0, hkx+pp]
+
+    sc_tm:
+      key.tags:
+        - screw
+      anchor:
+        - ref: matrix_ecol_qrow
+          shift: [0, hkx+pp-sp]
+    sc_rm:
+      key.tags:
+        - screw
+      anchor:
+        - ref: matrix_tcol_qrow
+          shift: [hkx+2sp, hkx-sp]
+    sc_rb:
+      key.tags:
+        - screw
+      anchor:
+        - ref: thumb_outer
+          shift: [hkx+pp-1.2sp, -hkx-pp+1.2sp]
+    sc_rb2:
+      key.tags:
+        - screw
+      anchor:
+        - ref: thumb_inner
+          shift: [-hkx-pp+1.2sp, -hkx-pp+1.2sp]
+    sc_lb:
+      key.tags:
+        - screw
+      anchor:
+        - ref: matrix_qcol_zrow
+          shift: [-hkx-pp+0.9pf, -hkx-pp+0.9pf]
+
+    # sc_lb2:
+    #   key.tags:
+    #     - screw
+    #   anchor:
+    #     - ref: matrix_qcol_zrow
+    #       shift:
+    #         [
+    #           hkx+pp - sp-1.2,
+    #           -hkx-pp +wcol_stagger+ecol_stagger+rcol_stagger - kx-tcol_stagger-tcol_stagger +1.75 + sp,
+    #         ]
+
+    sc_lb3:
+      key.tags:
+        - screw
+      anchor:
+        - ref: matrix_qcol_zrow
+          shift:
+            [
+              hkx+pp-pf,
+              -hkx-pp +wcol_stagger+ecol_stagger+rcol_stagger - kx-tcol_stagger-tcol_stagger + 1.35pf,
+            ]
+
+  rotate: mirror_splay
+  mirror:
+    ref: matrix_tcol_qrow
+    distance: mirror_dist
+
+outlines:
+  keycaps:
+    - what: rectangle
+      where: keys
+      size: ks
+      fillet: 1.2
+
+  controller:
+    - what: rectangle
+      where: controller_center
+      size: [nicenano_width, nicenano_height]
+      # asym: both
+      # adjust.rotate: controller_rotation
+
+  battery:
+    - what: rectangle
+      where: battery_center
+      size: [battery_width, battery_height]
+
+  battery_connector:
+    - what: rectangle
+      where: mirror_reset_center
+      size: [battery_connector_width, battery_connector_height]
+      # adjust.rotate: battery_connector_rotation
+
+  power:
+    - what: rectangle
+      where: power_center
+      size: [power_width, power_height]
+
+  reset:
+    - what: rectangle
+      where: reset_center
+      size: [reset_width, reset_height]
+
+  plate:
+    - what: polygon
+      operation: stack
+      fillet: pf
+      points:
+        - ref: matrix_qcol_qrow
+          shift: [-hkx-pp, hkx+pp]
+        # - ref: matrix_qcol_qrow
+        #   shift: [hkx-pp, hkx+pp]
+        # - ref: matrix_qcol_qrow
+        #   shift: [0, hkx+pp]
+        - ref: matrix_wcol_qrow
+          shift: [-hkx-pp, hkx+pp]
+        - ref: matrix_wcol_qrow
+          shift: [0, hkx+pp]
+        - ref: matrix_ecol_qrow
+          shift: [-hkx-pp, hkx+pp]
+        # - ref: matrix_ecol_qrow
+        #   shift: [0, hkx+pp]
+        - ref: matrix_ecol_qrow
+          shift: [hkx+pp, hkx+pp]
+        - ref: matrix_rcol_qrow
+          shift: [0, hkx+pp]
+        - ref: matrix_rcol_qrow
+          shift: [hkx+pp, hkx+pp]
+        - ref: matrix_tcol_qrow
+          shift: [0, hkx+pp]
+        - ref: matrix_tcol_qrow
+          shift: [hkx+pp, hkx+pp]
+        - ref: matrix_tcol_qrow
+          shift: [hkx+pp+pf+1, hkx+pp + tcol_stagger]
+
+        # - ref: controller_center
+        #   shift: [0, 0]
+
+        - ref: mirror_matrix_tcol_qrow
+          shift: [hkx+pp+pf+1, hkx+pp + tcol_stagger]
+        - ref: mirror_matrix_tcol_qrow
+          shift: [hkx+pp, hkx+pp]
+        - ref: mirror_matrix_tcol_qrow
+          shift: [0, hkx+pp]
+        - ref: mirror_matrix_rcol_qrow
+          shift: [hkx+pp, hkx+pp]
+        - ref: mirror_matrix_rcol_qrow
+          shift: [0, hkx+pp]
+        - ref: mirror_matrix_ecol_qrow
+          shift: [hkx+pp, hkx+pp]
+        - ref: mirror_matrix_ecol_qrow
+          shift: [-hkx-pp, hkx+pp]
+        - ref: mirror_matrix_wcol_qrow
+          shift: [0, hkx+pp]
+        - ref: mirror_matrix_wcol_qrow
+          shift: [-hkx-pp, hkx+pp]
+        # - ref: mirror_matrix_qcol_qrow
+        #   shift: [hkx-pp, hkx+pp]
+        - ref: mirror_matrix_qcol_qrow
+          shift: [-hkx-pp, hkx+pp]
+
+        - ref: mirror_matrix_qcol_zrow
+          shift: [-(hkx+pp), -(hkx+pp)]
+        - ref: mirror_matrix_qcol_zrow
+          shift:
+            [
+              hkx+pp,
+              -hkx-pp +wcol_stagger+ecol_stagger+rcol_stagger - kx-tcol_stagger-tcol_stagger,
+            ]
+        # - ref: mirror_matrix_qcol_zrow
+        #   shift: [(hkx+pp), -(hkx+pp)]
+        - ref: mirror_matrix_qcol_zrow
+          shift: [(hkx+pp), -(hkx+pp) + wcol_stagger]
+        - ref: mirror_matrix_qcol_zrow
+          shift: [3ks+3kp - (hkx+pp), -(hkx+pp) + wcol_stagger]
+
+        - ref: mirror_thumb_inner
+          shift: [-(hkx+pp), -(hkx+pp)]
+        - ref: mirror_thumb_outer
+          shift: [-(hkx+pp), -(hkx+pp)]
+        - ref: mirror_thumb_outer
+          shift: [(hkx+pp), -(hkx+pp)]
+        - ref: mirror_thumb_outer
+          shift: [(hkx+pp), hkx]
+        - ref: thumb_outer
+          shift: [(hkx+pp), hkx]
+        - ref: thumb_outer
+          shift: [(hkx+pp), -(hkx+pp)]
+        - ref: thumb_outer
+          shift: [-(hkx+pp), -(hkx+pp)]
+        - ref: thumb_inner
+          shift: [-(hkx+pp), -(hkx+pp)]
+        - ref: matrix_qcol_zrow
+          shift: [3ks+3kp - (hkx+pp), -(hkx+pp) + wcol_stagger]
+        - ref: matrix_qcol_zrow
+          shift: [(hkx+pp), -(hkx+pp) + wcol_stagger]
+        # - ref: helper_qcol_zrow_thumb_inter
+        # shift: [0, 0]
+        - ref: matrix_qcol_zrow
+          shift:
+            [
+              hkx+pp,
+              -hkx-pp +wcol_stagger+ecol_stagger+rcol_stagger - kx-tcol_stagger-tcol_stagger,
+            ]
+        - ref: matrix_qcol_zrow
+          shift: [-(hkx+pp), -(hkx+pp)]
+
+  screws:
+    - what: circle
+      where: screw
+      radius: sr
+
+  combo:
+    - operation: stack
+      name: plate
+    - operation: subtract
+      name: keycaps
+    - operation: subtract
+      name: controller
+    - operation: subtract
+      name: battery
+    - operation: subtract
+      name: battery_connector
+    - operation: subtract
+      name: power
+    - operation: subtract
+      name: reset
+    - operation: subtract
+      name: screws
+
+  pcb_outline:
+    - operation: stack
+      name: plate
+    - operation: subtract
+      name: screws
+
+  keycap_exp:
+    - what: rectangle
+      where: keys
+      size: ks + 2
+      # fillet: 1.2
+
+  case_screws:
+    - what: circle
+      where: screw
+      radius: 0.8
+
+  case_outline:
+    - what: outline
+      name: plate
+      # expand: 2
+
+  case_ref:
+    - operation: stack
+      name: case_outline
+    - operation: subtract
+      name: keycap_exp
+    - operation: subtract
+      name: case_screws
+    - operation: add
+      name: keycaps
+    - operation: subtract
+      name: controller
+    - operation: subtract
+      name: battery
+    - operation: subtract
+      name: battery_connector
+    - operation: subtract
+      name: power
+    - operation: subtract
+      name: reset
+
+pcbs:
+  main_pcb:
+    outlines:
+      main:
+        outline: pcb_outline
+    footprints:
+      switch:
+        what: pg1316s
+        where: keys
+        params:
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      diodes_left:
+        what: diode_tht_sod123
+        where: /^matrix_.*|^thumb_.*/
+        params:
+          side: "F"
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [0.3, 2.4]
+      diodes_right:
+        what: diode_tht_sod123
+        where: /^mirror_matrix_.*|^mirror_thumb_.*/
+        params:
+          side: "F"
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          shift: [-0.3, 2.4]
+      controller_left:
+        what: nicenano
+        where: controller_center
+        params:
+          orientation: up
+        adjust:
+          rotate: -90
+          shift: [0, -1.28]
+      power_switch:
+        what: power_switch_smd_side
+        where: power_center
+        adjust.rotate: -90
+      reset:
+        what: reset
+        params:
+          from: GND
+          to: RST
+        where: reset_center
+      battery_pad:
+        what: battery_pad
+        params:
+          plus: RAW
+          minus: GND
+        where: mirror_reset_center
+      battery_outline:
+        what: battery_outline
+        where: battery_center
+        adjust.rotate: -90
+  case_pcb:
+    outlines:
+      main:
+        outline: case_ref

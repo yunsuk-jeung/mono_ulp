@@ -16,8 +16,8 @@ units:
   thumb_splay: 15
 
   # BOARD
-  bp_t: 16
-  bp_b: 10-tcol_stagger
+  bp_t: 12
+  bp_b: 12-tcol_stagger
   bp_r: 16
   bp_l: 12
   # case
@@ -80,7 +80,7 @@ points:
     controller:
       anchor:
         ref: matrix_tcolumn_qrow
-        shift: [controller_rel_x, controller_rel_y+7]
+        shift: [controller_rel_x, controller_rel_y]
 
     # controller:
     #   anchor:
@@ -88,11 +88,15 @@ points:
     #     shift: [-6.5, 22]
     #     rotate: 90
 
+    # battery:
+    #   anchor:
+    #     ref: matrix_tcolumn_qrow
+    #     shift: [18, -28]
+    #     rotate: 90
     battery:
       anchor:
-        ref: matrix_tcolumn_qrow
-        shift: [18, -28]
-        rotate: 90
+        ref: matrix_qcolumn_zrow
+        shift: [18, -17]
 
   mirror:
     ref: matrix_rcolumn_arow

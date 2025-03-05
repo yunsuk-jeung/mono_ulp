@@ -9,10 +9,10 @@ units:
   keycaps_padding: 1
   keycap_dist: keycaps_size+keycaps_padding
   qcol_stagger: 0U
-  wcol_stagger: 0.5U
-  ecol_stagger: 0.25U
-  rcol_stagger: -0.25U
-  tcol_stagger: -0.15U
+  wcol_stagger: 0U
+  ecol_stagger: 0U
+  rcol_stagger: -0U
+  tcol_stagger: -0U
   thumb_splay: 15
 
   # BOARD
@@ -69,7 +69,7 @@ points:
         padding: keycap_dist
       anchor:
         ref: matrix_rcolumn_zrow
-        shift: [0, -keycap_dist-6]
+        shift: [0, -keycap_dist]
       columns:
         inner:
         middle.key:
@@ -80,7 +80,7 @@ points:
     controller:
       anchor:
         ref: matrix_tcolumn_qrow
-        shift: [controller_rel_x, controller_rel_y]
+        shift: [controller_rel_x, controller_rel_y-17]
 
     # controller:
     #   anchor:
@@ -96,7 +96,7 @@ points:
     battery:
       anchor:
         ref: matrix_qcolumn_zrow
-        shift: [18, -17]
+        shift: [12, -17]
 
   mirror:
     ref: matrix_rcolumn_arow

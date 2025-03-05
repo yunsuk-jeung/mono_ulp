@@ -13,13 +13,13 @@ units:
   ecol_stagger: 0.25U
   rcol_stagger: -0.25U
   tcol_stagger: -0.15U
-  thumb_splay: 0
+  thumb_splay: 15
 
   # BOARD
-  bp_t: 22
-  bp_b: 10
-  bp_r: 10
-  bp_l: 10
+  bp_t: 16
+  bp_b: 10-tcol_stagger
+  bp_r: 16
+  bp_l: 12
   # case
   case_edge_size: 0
 
@@ -69,24 +69,24 @@ points:
         padding: keycap_dist
       anchor:
         ref: matrix_rcolumn_zrow
-        shift: [0, -keycap_dist]
+        shift: [0, -keycap_dist-6]
       columns:
         inner:
         middle.key:
-          shift: [0, tcol_stagger]
+          shift: [0, 0]
         outer.key:
-          shift: [0, tcol_stagger+tcol_stagger]
-
-    # controller:
-    #   anchor:
-    #     ref: matrix_tcolumn_qrow
-    #     shift: [controller_rel_x, controller_rel_y]
+          shift: [0, 0]
 
     controller:
       anchor:
         ref: matrix_tcolumn_qrow
-        shift: [10, 18]
-        rotate: 90
+        shift: [controller_rel_x, controller_rel_y+7]
+
+    # controller:
+    #   anchor:
+    #     ref: matrix_tcolumn_qrow
+    #     shift: [-6.5, 22]
+    #     rotate: 90
 
     battery:
       anchor:
@@ -109,7 +109,7 @@ outlines:
   board:
     - what: polygon
       operation: stack
-      fillet: 2
+      fillet: 1
       points:
         - ref: matrix_ecolumn_qrow
           shift: [-2*keycap_dist -bp_l, bp_t]
@@ -117,15 +117,12 @@ outlines:
           shift: [3*keycap_dist+bp_r, bp_t]
         - ref: matrix_ecolumn_zrow
           shift:
-            [
-              3*keycap_dist+bp_r,
-              rcol_stagger+ tcol_stagger + tcol_stagger - keycap_dist-bp_b,
-            ]
+            [3*keycap_dist+bp_r, rcol_stagger+  tcol_stagger - keycap_dist-bp_b]
         - ref: matrix_ecolumn_zrow
           shift:
             [
               -2*keycap_dist- bp_l,
-              rcol_stagger+ tcol_stagger + tcol_stagger - keycap_dist -bp_b,
+              rcol_stagger+  tcol_stagger - keycap_dist -bp_b,
             ]
 
   controller:

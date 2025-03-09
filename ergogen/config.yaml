@@ -8,17 +8,19 @@ units:
   keycaps_size: 16
   keycaps_padding: 1
   keycap_dist: keycaps_size+keycaps_padding
-  qcol_stagger: 0U
-  wcol_stagger: 0U
-  ecol_stagger: 0U
-  rcol_stagger: -0U
-  tcol_stagger: -0U
+  kd: keycaps_size+keycaps_padding
+  qcol_stagger: 0kd
+  wcol_stagger: 0.5kd
+  ecol_stagger: 0.25kd
+  rcol_stagger: -0.125kd
+  tcol_stagger: -0.125kd
+  ycol_stagger: -0.125kd
   thumb_splay: 15
 
   # BOARD
   bp_t: 12
-  bp_b: 12-tcol_stagger
-  bp_r: 16
+  bp_b: 14
+  bp_r: 30 
   bp_l: 12
   # case
   case_edge_size: 0
@@ -38,11 +40,11 @@ units:
   reset_height: 6.4
 
   #components_loc
-  controller_rel_x: 20
-  controller_rel_y: 0
+  controller_rel_x: 3*kd+20
+  controller_rel_y: bp_t - nicenano_height * 0.5 
 
-  battery_rel_x: 25
-  battery_rel_y: -15
+  battery_rel_x: kd+20
+  battery_rel_y: -7 
 
 points:
   zones:
@@ -57,6 +59,7 @@ points:
         ecolumn.key.stagger: ecol_stagger
         rcolumn.key.stagger: rcol_stagger
         tcolumn.key.stagger: tcol_stagger
+        ycolumn.key.stagger: ycol_stagger
       rows:
         zrow.padding: keycaps_size + keycaps_padding
         arow.padding: keycaps_size + keycaps_padding
@@ -73,14 +76,14 @@ points:
       columns:
         inner:
         middle.key:
-          shift: [0, 0]
+          stagger: tcol_stagger
         outer.key:
-          shift: [0, 0]
+          stagger: ycol_stagger
 
     controller:
       anchor:
-        ref: matrix_tcolumn_qrow
-        shift: [controller_rel_x, controller_rel_y-17]
+        ref: matrix_ecolumn_qrow
+        shift: [controller_rel_x, controller_rel_y]
 
     # controller:
     #   anchor:
@@ -93,10 +96,12 @@ points:
     #     ref: matrix_tcolumn_qrow
     #     shift: [18, -28]
     #     rotate: 90
+
     battery:
       anchor:
-        ref: matrix_qcolumn_zrow
-        shift: [12, -17]
+        ref: matrix_tcolumn_zrow
+        shift: [battery_rel_x, battery_rel_y]
+        rotate: 90
 
   mirror:
     ref: matrix_rcolumn_arow
@@ -152,6 +157,16 @@ outlines:
       name: controller
     - operation: stack
       name: battery
+
+  combo2:
+    - operation: stack
+      name: keycaps
+    - operation: stack
+      name: board
+    # - operation: stack
+    #   name: controller
+    # - operation: stack
+    #   name: battery
 
 pcbs:
   main_pcb:

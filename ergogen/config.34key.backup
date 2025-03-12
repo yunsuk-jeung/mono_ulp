@@ -18,53 +18,43 @@ units:
   thumb_splay: 15
 
   # BOARD
-  bp_t: 32 
-  bp_b: 12
-  bp_r: 12 
+  bp_t: 14 
+  bp_b: 14
+  bp_r: 30 
   bp_l: 12
   # case
   case_edge_size: 0
 
   # components
   components_padding: 4
-  nicenano_width: 19.05
-  nicenano_height: 21
-  ctype_height: 1.53
-  ctype_width: 8.95
-  battery_width: 50 
-  battery_height: 18 
-  battery_connector_width: 8.275 # !
-  battery_connector_height: 3.475 # !
-  power_width: 8.425
-  power_height: 4.275
+  nicenano_width: 17.78
+  nicenano_height: 33
+  battery_width: 30
+  battery_height: 12
+  battery_connector_width: 0.4U # !
+  battery_connector_height: 0.8U # !
+  power_width: 2.7
+  power_height: 7.8
   power_button_size: 1.5
   reset_width: 4.5
   reset_height: 6.4
 
-  #components_loc
-  # controller_rel_x: 3*kd+20
-  # controller_rel_y: bp_t - nicenano_height * 0.5 
-  # controller_rot: 90
-  #
-  # battery_rel_x: kd+20
-  # battery_rel_y: -7 
-  # battery_rot: 90
-
-  controller_rel_x: -28
-  controller_rel_y: bp_t - nicenano_height * 0.5  -0.7
+  # components_loc
+  controller_rel_x: 2kd+20
+  controller_rel_y: bp_t - nicenano_height * 0.5 
   controller_rot: 0
 
-  battery_rel_x: -10
-  battery_rel_y: 2kd+bp_t - nicenano_width * 0.5 -2
-  battery_rot: 90
+  battery_rel_x: 2kd+20
+  battery_rel_y: -7 
+  battery_rot: 0
 
-  power_rel_x:  controller_rel_x + power_width + 10
-  power_rel_y: bp_t - power_height * 0.5  -0.4
-  power_rot: 0
-
-  battery_connector_rel_x: -9
-  battery_connector_rel_y: 20
-  battery_connector_rot: 90
+  # controller_rel_x: -28
+  # controller_rel_y: bp_t - nicenano_width * 0.5  -2
+  # controller_rot: 90
+  #
+  # battery_rel_x: 0
+  # battery_rel_y:  2kd+bp_t - nicenano_width * 0.5  -2
+  # battery_rot: 90
 
 points:
   zones:
@@ -75,75 +65,41 @@ points:
       anchor.shift: [50, -100]
       columns:
         qcolumn.key.stagger: qcol_stagger
-        qcolumn.key.column_net: P5
         wcolumn.key.stagger: wcol_stagger
-        wcolumn.key.column_net: P4
         ecolumn.key.stagger: ecol_stagger
-        ecolumn.key.column_net: P3
         rcolumn.key.stagger: rcol_stagger
-        rcolumn.key.column_net: P2
         tcolumn.key.stagger: tcol_stagger
-        tcolumn.key.column_net: P1
-        ycolumn.key.stagger: ycol_stagger
-        ycolumn.key.column_net: P0
-        # ycolumn.key.mirror.column_net: P0
+        # ycolumn.key.stagger: ycol_stagger
       rows:
         zrow.padding: keycaps_size + keycaps_padding
-        zrow.row_net: P9
         arow.padding: keycaps_size + keycaps_padding
-        arow.row_net: P8
         qrow.padding: keycaps_size + keycaps_padding
-        qrow.row_net: P7
 
     thumb:
       key:
         tags: "keys"
         spread: keycap_dist
         padding: keycap_dist
-        row_net: P10
-        # mirror.row_net:
       anchor:
         ref: matrix_rcolumn_zrow
         shift: [0, -keycap_dist]
       columns:
-        inner.key:
-          column_net: P3
+        inner:
         middle.key:
           stagger: tcol_stagger
-          column_net: P4
-        outer.key:
-          stagger: ycol_stagger
-          column_net: P5
-        
+        # outer.key:
+        #   stagger: ycol_stagger
 
     controller:
       anchor:
         ref: matrix_ecolumn_qrow
         shift: [controller_rel_x, controller_rel_y]
-        rotate: controller_rot
-
-    ctype:
-      anchor:
-        ref: controller
-        shift: [0, 0.5 nicenano_height + 0.5 ctype_height ]
 
     battery:
       anchor:
-        ref: matrix_tcolumn_zrow
+        ref: matrix_ecolumn_zrow
         shift: [battery_rel_x, battery_rel_y]
         rotate: 90
-
-    power:
-      anchor:
-        ref: matrix_ecolumn_qrow 
-        shift: [power_rel_x, power_rel_y+0.5]
-        rotate: power_rot
-
-    battery_connector:
-      anchor:
-        ref: matrix_ecolumn_qrow 
-        shift: [battery_connector_rel_x, battery_connector_rel_y]
-        rotate: battery_connector_rot
 
   mirror:
     ref: matrix_rcolumn_arow
@@ -165,28 +121,11 @@ outlines:
         - ref: matrix_ecolumn_qrow
           shift: [-2*keycap_dist -bp_l, bp_t]
         - ref: matrix_ecolumn_qrow
-          shift: [3*keycap_dist+bp_r, bp_t]
+          shift: [2*keycap_dist+bp_r, bp_t]
         - ref: matrix_ecolumn_zrow
           shift:
-            [3*keycap_dist+bp_r, rcol_stagger+  tcol_stagger - keycap_dist-bp_b]
+            [2*keycap_dist+bp_r, rcol_stagger+  tcol_stagger - keycap_dist-bp_b]
         - ref: matrix_ecolumn_zrow
-          shift:
-            [
-              -2*keycap_dist- bp_l,
-              rcol_stagger+  tcol_stagger - keycap_dist -bp_b,
-            ]
-    - what: polygon
-      operation: stack
-      fillet: 1
-      points:
-        - ref: mirror_matrix_ecolumn_qrow
-          shift: [-2*keycap_dist -bp_l, bp_t]
-        - ref: mirror_matrix_ecolumn_qrow
-          shift: [3*keycap_dist+bp_r, bp_t]
-        - ref: mirror_matrix_ecolumn_zrow
-          shift:
-            [3*keycap_dist+bp_r, rcol_stagger+  tcol_stagger - keycap_dist-bp_b]
-        - ref: mirror_matrix_ecolumn_zrow
           shift:
             [
               -2*keycap_dist- bp_l,
@@ -198,13 +137,7 @@ outlines:
       where: controller
       size: [nicenano_width, nicenano_height]
       asym: both
-      # adjust.rotate: controller_rot
-
-  ctype:
-    - what: rectangle
-      where: ctype
-      size: [ctype_width, ctype_height]
-      asym: both
+      adjust.rotate: controller_rot
 
   battery:
     - what: rectangle
@@ -212,18 +145,6 @@ outlines:
       size: [battery_width, battery_height]
       asym: both
       adjust.rotate: battery_rot
-
-  power_switch:
-    - what: rectangle
-      where: power
-      size: [power_width, power_height]
-      asym: both
-
-  battery_connector:
-    - what: rectangle
-      where: battery_connector
-      size: [battery_connector_width, battery_connector_height]
-      asym: both
 
   combo:
     - operation: stack
@@ -233,13 +154,7 @@ outlines:
     - operation: stack
       name: controller
     - operation: stack
-      name: ctype
-    - operation: stack
       name: battery
-    - operation: stack
-      name: power_switch
-    - operation: stack
-      name: battery_connector
 
   combo2:
     - operation: stack
@@ -278,8 +193,6 @@ pcbs:
           to: "{{row_net}}"
         adjust:
           shift: [0.3, 2.4]
-          rotate: 180
-
       diodes_right:
         what: diode_tht_sod123
         where: /^mirror_matrix_.*|^mirror_thumb_.*/
@@ -289,44 +202,11 @@ pcbs:
           to: "{{row_net}}"
         adjust:
           shift: [-0.3, 2.4]
-          rotate: 180
 
       # controller footprints isn't mirrored
-
-      controller_left:
-        what: xiao_ble
-        # params: 
-        #   P0: P0_l
-        where: controller
-
-      controller_right:
-        what: xiao_ble
-        where: mirror_controller
-
-      battery_connector_left:
-        what: battery_pad
-        params:
-          plus: B+
-          minus: B-
-        where: battery_connector
-
-      battery_connector_right:
-        what: battery_pad
-        params:
-          plus: B+
-          minus: B-
-        where: mirror_battery_connector
-
-      power_left:
-        what: power_switch_smd_side
-        where: power
-        adjust.rotate: 90
-
-      power_right:
-        what: power_switch_smd_side
-        where: mirror_power
-        adjust.rotate: -90
-
+      # controller_left:
+      #   what: nicenano
+      #   where: controller
       #   params:
       #     orientation: up
       #   # PCB controller is 90 oriented by default
@@ -361,4 +241,3 @@ pcbs:
       #     side: "F"
       #     mirrored: false
       #     text: "n36tsu v0.1.0"
-

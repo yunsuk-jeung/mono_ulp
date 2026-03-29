@@ -18,10 +18,10 @@ units:
   thumb_splay: 15
 
   # BOARD
-  bp_t: 32 
-  bp_b: 12
-  bp_r: 12 
-  bp_l: 12
+  bp_t: 32.4
+  bp_b: 8 + 5.2
+  bp_r: 8 + 5.2
+  bp_l: 8 + 5.2
   # case
   case_edge_size: 0
 
@@ -31,8 +31,8 @@ units:
   nicenano_height: 21
   ctype_height: 1.53
   ctype_width: 8.95
-  battery_width: 50 
-  battery_height: 18 
+  battery_width: 70
+  battery_height: 20
   battery_connector_width: 8.275 # !
   battery_connector_height: 3.475 # !
   power_width: 8.425
@@ -43,28 +43,29 @@ units:
 
   #components_loc
   # controller_rel_x: 3*kd+20
-  # controller_rel_y: bp_t - nicenano_height * 0.5 
+  # controller_rel_y: bp_t - nicenano_height * 0.5
   # controller_rot: 90
   #
   # battery_rel_x: kd+20
-  # battery_rel_y: -7 
+  # battery_rel_y: -7
   # battery_rot: 90
 
-  controller_rel_x: -28
+  controller_rel_x: -32
   controller_rel_y: bp_t - nicenano_height * 0.5  -0.7
   controller_rot: 0
 
-  battery_rel_x: -10
+  battery_rel_x: -17
   battery_rel_y: 2kd+bp_t - nicenano_width * 0.5 -2
   battery_rot: 90
 
-  power_rel_x:  controller_rel_x + power_width + 10
-  power_rel_y: bp_t - power_height * 0.5  -0.4
-  power_rot: 0
+  # power_rel_x: controller_rel_x + power_width + 7
+  power_rel_x: 3*keycap_dist + bp_r - 0.5 power_height+ 0.338
+  power_rel_y: 20
+  power_rot: -90
 
-  battery_connector_rel_x: -9
+  battery_connector_rel_x: 3*keycap_dist + bp_r - 1.5 power_height
   battery_connector_rel_y: 20
-  battery_connector_rot: 90
+  battery_connector_rot: -90
 
 points:
   zones:
@@ -74,47 +75,89 @@ points:
         tags: "keys"
       anchor.shift: [50, -100]
       columns:
-        qcolumn.key.stagger: qcol_stagger
-        qcolumn.key.column_net: P5
-        wcolumn.key.stagger: wcol_stagger
-        wcolumn.key.column_net: P4
-        ecolumn.key.stagger: ecol_stagger
-        ecolumn.key.column_net: P3
-        rcolumn.key.stagger: rcol_stagger
-        rcolumn.key.column_net: P2
-        tcolumn.key.stagger: tcol_stagger
-        tcolumn.key.column_net: P1
-        ycolumn.key.stagger: ycol_stagger
-        ycolumn.key.column_net: P0
-        # ycolumn.key.mirror.column_net: P0
-      rows:
-        zrow.padding: keycaps_size + keycaps_padding
-        zrow.row_net: P9
-        arow.padding: keycaps_size + keycaps_padding
-        arow.row_net: P8
-        qrow.padding: keycaps_size + keycaps_padding
-        qrow.row_net: P7
-
-    thumb:
-      key:
-        tags: "keys"
-        spread: keycap_dist
-        padding: keycap_dist
-        row_net: P10
-        # mirror.row_net:
-      anchor:
-        ref: matrix_rcolumn_zrow
-        shift: [0, -keycap_dist]
-      columns:
-        inner.key:
+        qcolumn.key:
+          stagger: qcol_stagger
+          column_net: P0
+          mirror.column_net: P0r
+        wcolumn.key:
+          stagger: wcol_stagger
+          column_net: P1
+          mirror.column_net: P1r
+        ecolumn.key:
+          stagger: ecol_stagger
+          column_net: P2
+          mirror.column_net: P2r
+        rcolumn.key:
+          stagger: rcol_stagger
           column_net: P3
-        middle.key:
+          mirror.column_net: P3r
+        tcolumn.key:
           stagger: tcol_stagger
           column_net: P4
-        outer.key:
+          mirror.column_net: P4r
+        ycolumn.key:
           stagger: ycol_stagger
           column_net: P5
-        
+          mirror.column_net: P5r
+        # ycolumn.key.mirror.column_net: P0
+      rows:
+        thumb_row:
+          padding: keycap_dist
+          row_net: P10
+          mirror.row_net: P10r
+        zrow:
+          padding: keycaps_size + keycaps_padding
+          row_net: P9
+          mirror.row_net: P9r
+        arow:
+          padding: keycaps_size + keycaps_padding
+          row_net: P8
+          mirror.row_net: P8r
+        qrow:
+          padding: keycaps_size + keycaps_padding
+          row_net: P7
+          mirror.row_net: P7r
+
+    mounting_hole_lt:
+      key.tags:
+        - screw
+      anchor:
+        ref: matrix_qcolumn_qrow
+        shift: [-bp_l + 2.1, bp_t - 2.1]
+
+    mounting_hole_lb:
+      key.tags:
+        - screw
+      anchor:
+        ref: matrix_qcolumn_thumb_row
+        shift: [-bp_l + 2.1, -5.1]
+
+    mounting_hole_rt:
+      key.tags:
+        - screw
+      anchor:
+        ref: matrix_ycolumn_qrow
+        shift: [bp_l-2.1, bp_t - 2.1]
+
+    mounting_hole_rb:
+      key.tags:
+        - screw
+      anchor:
+        ref: matrix_ycolumn_thumb_row
+        shift: [bp_l - 2.1, -5.1]
+
+    # mounting_hole_mt:
+    #   key.tags:
+    #     - screw
+    #   anchor:
+    #     ref: matrix_ecolumn_qrow
+    #     shift: [8.5, bp_t-2.1]
+    # mounting_hole_mb:
+    #   key.tags:
+    #     - screw
+    #   anchor:
+    #     ref: matrix_ecolumn_thumb_row
+    #     shift: [8.5, -11.1]
 
     controller:
       anchor:
@@ -125,7 +168,7 @@ points:
     ctype:
       anchor:
         ref: controller
-        shift: [0, 0.5 nicenano_height + 0.5 ctype_height ]
+        shift: [0, 0.5 nicenano_height + 0.5 ctype_height]
 
     battery:
       anchor:
@@ -135,13 +178,13 @@ points:
 
     power:
       anchor:
-        ref: matrix_ecolumn_qrow 
+        ref: matrix_ecolumn_qrow
         shift: [power_rel_x, power_rel_y+0.5]
         rotate: power_rot
 
     battery_connector:
       anchor:
-        ref: matrix_ecolumn_qrow 
+        ref: matrix_ecolumn_qrow
         shift: [battery_connector_rel_x, battery_connector_rel_y]
         rotate: battery_connector_rot
 
@@ -225,6 +268,11 @@ outlines:
       size: [battery_connector_width, battery_connector_height]
       asym: both
 
+  screws:
+    - what: circle
+      where: screw
+      radius: 1.1
+
   combo:
     - operation: stack
       name: keycaps
@@ -240,6 +288,8 @@ outlines:
       name: power_switch
     - operation: stack
       name: battery_connector
+    - operation: stack
+      name: screws
 
   combo2:
     - operation: stack
@@ -250,12 +300,18 @@ outlines:
     #   name: controller
     # - operation: stack
     #   name: battery
+  pcb_outline:
+    - operation: stack
+      name: board
+    - operation: stack
+      name: screws
 
 pcbs:
   main_pcb:
     outlines:
       main:
-        outline: board
+        outline: pcb_outline
+
       # battery:
       #   outline: battery
       #   layer: "F.SilkS"
@@ -295,35 +351,61 @@ pcbs:
 
       controller_left:
         what: xiao_ble
-        # params: 
+        # params:
         #   P0: P0_l
         where: controller
 
       controller_right:
         what: xiao_ble
+        params:
+          VIN: VINr
+          SWDIO: SWDIO7
+          SWDCLK: SWDCLKr
+          RST: RSTr
+          GND: GNDr
+          P0: P0r
+          P1: P1r
+          P2: P2r
+          P3: P3r
+          P4: P4r
+          P5: P5r
+          P6: P6r
+          P7: P7r
+          P8: P8r
+          P9: P9r
+          P10: P10r
+          RAW3V3: RAW3V3r
+          RAW5V: RAW5Vr
         where: mirror_controller
 
       battery_connector_left:
         what: battery_pad
         params:
-          plus: B+
-          minus: B-
+          plus: BAT_P
+          minus: GND
         where: battery_connector
 
       battery_connector_right:
         what: battery_pad
         params:
-          plus: B+
-          minus: B-
+          plus: BAT_Pr
+          minus: GNDr
         where: mirror_battery_connector
+        adjust.rotate: 180
 
       power_left:
         what: power_switch_smd_side
+        params:
+          to: VIN
         where: power
         adjust.rotate: 90
 
       power_right:
         what: power_switch_smd_side
+        params:
+          from: BAT_Pr
+          to: VINr
+          invert_behavior: false
         where: mirror_power
         adjust.rotate: -90
 
@@ -361,4 +443,3 @@ pcbs:
       #     side: "F"
       #     mirrored: false
       #     text: "n36tsu v0.1.0"
-

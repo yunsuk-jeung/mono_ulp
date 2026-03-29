@@ -21,9 +21,9 @@ module.exports = {
         (fp_line (start -3 -1) (end -3 1) (layer ${p.side}.SilkS) (width 0.15))
         (fp_line (start -3 1) (end 3 1) (layer ${p.side}.SilkS) (width 0.15))
         
-        (fp_line (start -3 -2) (end -3 -1) (layer ${p.side}.SilkS) (width 0.15))
-        (fp_line (start -3.5 -1.5) (end -2.5 -1.5) (layer ${p.side}.SilkS) (width 0.15))
-        (fp_line (start 3.5 -1.5) (end 2.5 -1.5) (layer ${p.side}.SilkS) (width 0.15))
+        (fp_line (start -5 -0.5) (end -5 0.5) (layer ${p.side}.SilkS) (width 0.15))
+        (fp_line (start -5.5 0) (end -4.5 0) (layer ${p.side}.SilkS) (width 0.15))
+        (fp_line (start 5.5 0) (end 4.5 0) (layer ${p.side}.SilkS) (width 0.15))
 
         ${"" /* pins */}
         (pad 1 smd rect (at -3.1 0 ${p.r}) (size 1.8 1.8) (layers ${p.side}.Cu ${p.side}.Paste ${p.side}.Mask) ${p.plus})

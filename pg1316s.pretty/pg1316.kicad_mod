@@ -1,0 +1,167 @@
+(footprint "pg1316"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 -0.5 0)
+		(unlocked yes)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "486a34b6-4d4d-44d1-b03e-46ab3aba38cb")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.1)
+			)
+		)
+	)
+	(property "Value" "pg1316"
+		(at 0 1 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "153911b0-548c-416f-8cd3-030eb3b131a0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "154197b0-e225-4351-80fd-9845c845f1bc")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a840d0f8-da9a-45ad-9734-b5ced1d7e558")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_poly
+		(pts
+			(xy 3.8 -3.5) (xy 3.8 -1.65) (xy 3.3 -1.15) (xy -2.2 -1.15) (xy -2.2 -3.9) (xy 2.2 -3.9) (xy 2.2 -3.5)
+		)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "Dwgs.User")
+		(uuid "bfd810ea-95ce-4a37-a37f-f933af42b645")
+	)
+	(fp_circle
+		(center -5.8 2.75)
+		(end -5.3 2.75)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "Edge.Cuts")
+		(uuid "2b69d2e4-8cc3-4e4a-9b23-306de5238b23")
+	)
+	(fp_circle
+		(center 5.8 -2.75)
+		(end 6.4 -2.75)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "Edge.Cuts")
+		(uuid "bc3c1ab4-128d-44b8-9a0b-a1fbf6608476")
+	)
+	(fp_rect
+		(start -8 8)
+		(end 8 -8)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "9edcca5d-b36c-487f-b0ca-bec8e28f8a5f")
+	)
+	(fp_rect
+		(start -6.75 -6.5)
+		(end 6.75 6.5)
+		(stroke
+			(width 0.1)
+			(type default)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "fa79335d-8571-4191-9964-fe32e75f9889")
+	)
+	(pad "1" smd rect
+		(at -2.5 2.65)
+		(size 1.55 2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "ddaaff9e-4e40-4b63-9dc4-dabc530ace5d")
+	)
+	(pad "2" smd rect
+		(at 2.5 2.65)
+		(size 1.55 2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "606e8e30-403d-4715-b7fa-b85d6cd885d9")
+	)
+	(pad "3" smd rect
+		(at -6.35 -6)
+		(size 2 2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(thermal_bridge_angle 45)
+		(uuid "4e35bc0d-e874-4b0d-bba1-df5214dffb8f")
+	)
+	(pad "3" smd rect
+		(at -6.35 6)
+		(size 2 2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(thermal_bridge_angle 45)
+		(uuid "252cb348-d804-4200-843f-bac8dbeb5484")
+	)
+	(pad "3" smd rect
+		(at 6.35 -6)
+		(size 2 2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(thermal_bridge_angle 45)
+		(uuid "dd23ba3f-7fce-4e66-9fa1-fb5bdc226668")
+	)
+	(pad "3" smd rect
+		(at 6.35 6)
+		(size 2 2)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(thermal_bridge_angle 45)
+		(uuid "39279ce3-eaf9-4769-9d4d-ada9a1172bdd")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/pg1316s.pretty/PG1316S.STEP"
+		(offset
+			(xyz -4.76 -6.26 -10.28)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -0 -0 -0)
+		)
+	)
+)
